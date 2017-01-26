@@ -1,0 +1,16 @@
+https://developer.mozilla.org/en-US/docs/Learn/HTML
+https://developer.mozilla.org/en/docs/Web/HTML/Element
+https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/HTML5_updates
+https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure
+
+
+https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Data_form_validation
+http://www.htmlgoodies.com/tutorials/forms/article.php/3888746/HTML-Forms-From-Basics-to-Style-Layouts.htm
+
+Switch on novalidate to check server side validation
+
+See form Labels
+
+See HTML5 semantic elements
+
+http://www.hongkiat.com/blog/html-5-semantics/

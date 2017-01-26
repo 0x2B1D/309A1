@@ -1,0 +1,281 @@
+<html>
+	<body>
+		<h1>Assignment 1</h1>
+		<h2>Submission</h2>
+			<ul>
+		 	<li> Due: January 29, 2017, Midnight, 
+			<li> A special 0% penalty for submitting by January 31, 2017, Midnight. 
+				Normally this is 20%.
+			<li> Not accepted after January 31, 2017.
+			</ul>
+		<h2>Groups</h2>
+		Work in groups of size 2. Both members of the group get the same mark.
+		<h2>Marking</h2>
+		We will be looking for (among other things)...
+		<ul>
+		<li> Simple, clean, clear MVC PHP code. The code does not repeat itself 
+			unnecessarily.
+		<li> Validation of inputs client side (see HTML validation)
+		<li> Effecive use of HTML5
+		<li> Validation server side (look into turning off client side validation in the browser to test this).
+			This will include re-population of form fields when appropriate. 
+		<li> Prepopulation of forms where appropriate, for example when updating the profile.
+		<li> Simple DB schema and effective use of SQL (simple clear queries)
+		<li> Use of prepared statements
+		<li> A good strategy to track recent 'iGetIt' or 'iDontGetIt' in the application. This strategy
+			should somehow take into account that some students may re-click frequently, 
+			some may not. Take a look at adding a timestamp to the database entries, 
+			keeping track of when the user clicked last etc.
+		<li> Use of some advanced techniques, for example, to template your website, so there
+			is less repeated code in the views.
+		<li> Great use of form inputs, and of different types.
+		<li> 10% of your mark on this assignment will be as a result of competition between groups.
+			For this, you should add additional features, and clearly identify
+			them to the TAs. Your marks for this part will be based on how interesting,
+			difficult and effective your additional features are.
+		<li> Your pages should display well under all current browsers, FireFox, Safari, Edge.
+		<li> An install script should be provided so we can simply install your application
+			in our cs website, using our own postgresql db. It seems to me that we should be able
+			to unzip your application, enter our database location and credentials in one spot, 
+			load your schema and run.
+		</ul>
+		<h2>Starter Code</h2>
+		Can be found <a href="../../iGetIt.zip">here</a>
+		<h2>Postgresql</h2>
+		You will be using postgresql for this assignment. Andrew Wang has this setup on 
+		a special database server for you. You can only reach this server from cs or cslinux.
+<xmp>
+
+Postgresql database credentials: 
+    utorid/last 5 digits of barcode, excluding last three control digits. 
+    So for 21761012413912000 ... the password is 13912 
+
+ssh -Y [UTORID]@cs.utm.utoronto.ca 
+psql -h mcsdb.utm.utoronto.ca -d [UTORID]_309 -U [UTORID]
+
+drop table appuser; 
+create table appuser ( 
+    username varchar(20) primary key, 
+    password varchar(20), 
+    otherinfo varchar(20) 
+); 
+\dt 
+select * from appuser; 
+
+insert into appuser (username, password, otherinfo) values('arnold', 'spiderman', 'something'); 
+insert into appuser (username, password, otherinfo) values('jane', 'wonderwoman', 'another thing'); 
+
+select * from appuser; 
+
+select otherinfo 
+from appuser 
+where username='arnold'; 
+
+select * 
+from appuser 
+where username='arnold' and password='zzzz'; 
+
+select count(*)
+ from appuser 
+where username='arnold' and password='spiderman'; 
+
+<ctrl-d> to quit
+</xmp>
+		<h2>Outline</h2>
+		Your job is to create the iGetIt application outlined in the mockup.
+		This application allows an instructor to create a class by providing a class name 
+		and a classroom secret code. The code is used to prevent voting for those not 
+		in the actual classroom. The students join the class by selecting the class and providing the code.
+		Students can then click on either "i Get It" or "i Don't Get It"
+		during the class. These clicks are recorded in the postgresql relational database.
+		The current level of understanding is displayed repeatedly on the instructors console.
+		<h2> Page Flow For Instructor </h2>
+		<ul>
+			<li> <a href=login.php>login</a> for the first time. They are taken to 
+				the <a href=profile.php>profile</a> page. After they create a profile, and declare
+				themselves as an instructor, 
+				they are taken to the <a href=instructor_createclass.php>instructor create class</a>
+				page. If they create a class, by entering class name and code, they are taken to the 
+				<a href=instructor_currentclass.php>instructor current class</a> page, where they
+				can watch the progress of their ongoing class.
+			<li> <a href=login.php>login</a> again.
+				They are taken to the <a href=instructor_createclass.php>instructor create class</a>
+				page. If they create a class, by entering a class name and code, they are taken to the 
+				<a href=instructor_currentclass.php>instructor current class</a> page, where they
+				can watch the progress of their ongoing class.
+			<li> <a href=instructor_currentclass.php>instructor current class</a> periodically refreshes itself. See the appropriate <a href=http://www.w3schools.com/tags/att_meta_http_equiv.asp>meta tag</a>. 
+			<li> Clicking the Class navigation on the left takes them to <a href=instructor_createclass.php>instructor create class</a>.
+		</ul>
+		<h2> Page Flow for Student </h2>
+		<ul>
+			<li> <a href=login.php>login</a> for the first time. They are taken to 
+				the <a href=profile.php>profile</a> page. After they create a profile, and declare
+				themselves as a stdudent, 
+				they are taken to the <a href=student_joinclass.php>student join class</a>
+				page. If they join a class, by selecting the class name, and entering the code, 
+				they are taken to the 
+				<a href=student_currentclass.php>student current class</a> page where they 
+				can click either the red or green button periodically to let the instructor
+				know of their understanding.
+			<li> <a href=login.php>login</a> again. 
+				They are taken to the <a href=student_joinclass.php>student join class</a>
+				page. If they join a class, by selecting the class name, and entering the code, 
+				they are taken to the 
+				<a href=student_currentclass.php>student current class</a> page where they 
+				can click either the red or green button periodically to let the instructor
+				know of their understanding.
+			<li> Clicking on the Class navigation on the left takes them to <a href=student_joinclass.php>student join class</a>.
+			</ul>
+
+		<h2>All Pages</h2>
+		<ul>
+			<li><a href=login.php>login</a>
+			<li><a href=profile.php>profile</a>
+			<li> <a href=student_joinclass.php>student join class</a>
+			<li><a href=instructor_currentclass.php>instructor current class</a>
+			<li><a href=instructor_createclass.php>instructor create class</a>
+			<li> <a href=student_currentclass.php>student current class</a>
+		</ul>
+		<h2>References</h2>
+		<ul>
+		<li> <a href=https://developer.mozilla.org/en-US/docs/Learn/HTML>Learn HTML at Mozilla</a>
+		<li> <a href=https://developer.mozilla.org/en/docs/Web/HTML/Element>HTML Elements</a>
+		<li> <a href=https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/HTML5_updates>HTML5 Forms</a>
+		<li> <a href=https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure>Basic HTML5 website structure</a>
+		<li> <a href=https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Data_form_validation>HTML5 Validation</a>
+		<li> <a href=http://www.htmlgoodies.com/tutorials/forms/article.php/3888746/HTML-Forms-From-Basics-to-Style-Layouts.htm>HTML5 Forms</a>
+		<li> Note: Switch on novalidate to check server side validation
+		<li> <a href=http://www.hongkiat.com/blog/html-5-semantics/>HTML5 Semantics</a>
+		</ul>
+<h2>Questions and Answers</h2>
+<dl>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	Can we use a framework like bootstrap etc?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	No
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	How does a new user register?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	Forgot to put a link to 'register' on the main login page.
+	This takes them to a something that looks like the profile page.
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	For templating the website, are we suppose to come up with ways to do that using vanilla php or can we
+	use some sort of templating engine?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	Write your own. That is, try to have the structure of the webpages not 
+	repeat in code everywhere. The goal is to have single places to modify
+	sitewide things.
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	Can we use Javascript?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	No
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	Can we modify the look, css of the website?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	Yes, but not for marks this time.
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	Will sanitizing SQL queries be expected, or considered extra features?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	Not sure what they are asking. You should use prepared statements.
+	You should always check the inputs on the backend.
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	Should we validate in HTML?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	Yes.
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	What about semantic elements in HTML?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	Yes, try to use the HTML5 elements properly. HTML5 form elements properly, 
+	labels etc.
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	How do I connect to the db in php?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+<xmp>
+$dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=[UTORID]_309 user=[UTORID] password=XXXXX");
+</xmp>
+where XXXXX is last 5 digits of barcode, excluding last three control
+digits. So for 21761012413912000 ... the password is 13912
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	Can I work alone?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	Yes, but you will be expected to achieve the same result.
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	Do I have to check inputs in the backend?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	Yes.
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	What if a user tries to register an account that
+	is already registered?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	They should not be allowed to do that.
+        </dd>
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+	How do I list my extra features? How do I list the members?
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+	Please submit a file <code>iGetIt/features.txt</code>. I have
+	added it to the iGetIt.zip, but you can just take <a href=../features.txt>this one</a> and 
+	add the file yourself.
+	Also, I already have the iGetIt/members.txt file.
+        </dd>
+<!-- yank 6
+<dt><font color=red><b>Question:</b></font></dt>
+        <dd>
+        </dd>
+<dt><font color=green><b>Answer:</b></font></dt>
+        <dd>
+        </dd>
+-->
+</dl>
+	</body>
+</html>
+
