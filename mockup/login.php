@@ -24,6 +24,8 @@
 					<p> <label for="user">User</label>    <input type="text" name="user"></input> </p>
 					<p> <label for="password">Password</label><input type="password" name="password"></input> </p>
 					<p> <input type="submit" />
+					<p> <input type="submit" name='Register' value='Register'/>
+
 				</fieldset>
 			</form>
 			<a href=>New Member</a>
