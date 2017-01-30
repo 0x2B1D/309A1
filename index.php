@@ -33,7 +33,8 @@
 				break;
 			}
 
-
+            rando test
+    
 			// validate and set errors
 			if(empty($_REQUEST['user'])){
 				$errors[]='user is required';
