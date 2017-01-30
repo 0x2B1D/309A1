@@ -10,7 +10,7 @@ $_REQUEST['email']=!empty($_REQUEST['email']) ? $_REQUEST['email'] : '';
 <html lang="en">
 
 			<h1>Register</h1>
-			<form>
+			<form method="post">
 				<fieldset>
 					<p> <label for="user">User</label>    <input type="text" name="user"></input> </p>
 					<p> <label for="password">Password</label><input type="password" name="password"></input> </p>
@@ -18,8 +18,8 @@ $_REQUEST['email']=!empty($_REQUEST['email']) ? $_REQUEST['email'] : '';
 					<p> <label for="lastName">Last Name</label><input type="text" name="lastName"></input> </p>
 					<p> <label for="email">email</label><input type="text" name="email"></input> </p>
 					<p> <label for="email">type</label>
-						<input type="radio" name="type">instructor</input> 
-						<input type="radio" name="type">student</input> 
+						<input type="radio" name="ins">instructor</input> 
+						<input type="radio" name="stu">student</input> 
 					</p>
 					<p> <input type="submit" />
 				</fieldset>
