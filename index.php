@@ -1,17 +1,14 @@
 <?php
-	require_once "model/GuessGame.php";
+    require_once "model/GuessGame.php";
     require_once "model/PHPmodel.php";
-	session_save_path("sess");
-	session_start(); 
-
-	ini_set('display_errors', 'On');
-
-	$errors=array();
-	$view="";
-    
-    
+    session_save_path("sess");
+    session_start(); 
+    ini_set('display_errors', 'On');
+    $errors=array();
+    $view="";       
     $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10556");
     $users_query = pg_query($dbconn, "select * from appuser;");
+    $model = new PHPmodel();
     
     /*while ($row = pg_fetch_row($users_query)){
         echo "first $row[0] $row[1]";
@@ -24,38 +21,30 @@
 	}
 
 	switch($_SESSION['state']){
-		case "login":
-			// the view we display by default
-			$view="login.php";    
-
+            case "login":
+            // the view we display by default
+            $view="login.php";    
             $users_query = pg_query($dbconn, "select * from appuser;"); 
             if(isset($_POST['login'])){
-			    // perform operation, switching state and view if necessary
-                
-                while ($row = pg_fetch_row($users_query)){
+	   // perform operation, switching state and view if necessary
+            while ($row = pg_fetch_row($users_query)){
                     // if registered go to profile
                     if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]"){
                         $_SESSION['state']='profile';
                         $view="profile.php";
                         break;
                     } 
-                    // TO-DO error checking
-                    
+                    // TO-DO error checking                   
                 }
                 break;
             }
-            
            // if(!empty($errors))break;
-
             if(isset($_POST['register'])){
                 $_SESSION['state']='register';
                 $view="register.php";
                 break;
             }
-
-            break;	
-           
-           
+            break;         
         // essentially the same as profile except no data filled out
         case 'register':
             $view="register.php";
@@ -63,6 +52,8 @@
             $fields = array('firstName', 'lastName', 'user', 'password', 'email');
 
             $error = false; //No errors yet
+            
+            /*
             foreach($fields AS $fieldname) { //Loop through each field
                 if(!isset($_POST[$fieldname]) || empty($_POST[$fieldname])) {
                     echo 'Field '.$fieldname.' missing!<br />'; //Display error with field
@@ -77,7 +68,12 @@
                 $_SESSION['state']="login";
                 $view="login.php"; 
             }
-
+            */
+            $code = $model->registerUser($_POST['user'], $_POST['password'], $_POST['firstName'], $_POST['lastName'], $_POST['email']);
+            if($code == 0){
+                $_SESSIION['state'] = "profile";
+                $view= "profile.php"; 
+            }
             break;
         case "profile":
             $view="profile.php";
@@ -115,7 +111,7 @@
 
 			break;
 
-		case "won":
+	case "won":
 			// the view we display by default
 			$view="play.php";
 
