@@ -33,7 +33,7 @@
 				break;
 			}
 
-            rando test
+            ran
     
 			// validate and set errors
 			if(empty($_REQUEST['user'])){
