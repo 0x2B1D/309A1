@@ -67,7 +67,7 @@ class PHPmodel{
     }
     
     
-    public function registerUser($username,$email, $password, $firstname, $lastname, $role){
+    public function registerUser($username,$email, $password, $firstname, $lastname){
         /*
          * Adds user into the appuser table
          * returns 0 if valid
@@ -78,7 +78,7 @@ class PHPmodel{
             return $v;
         }
         pg_prepare($this->dbconn,"new_entry",'INSERT into appuser values($1,$2,$3,$4,$5,$6)');
-        pg_execute($this->dbconn,"new_entry",array($username,$email, $password, $firstname, $lastname, $role));     
+        pg_execute($this->dbconn,"new_entry",array($username,$password, $firstname, $lastname, $email,NULL ));     
         return $v; 
     } 
     
