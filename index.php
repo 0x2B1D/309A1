@@ -33,21 +33,21 @@
 			    // perform operation, switching state and view if necessary
                 
                 while ($row = pg_fetch_row($users_query)){
-                         
-                    // if in the database but no profile
-                    if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[2]=="N"){
+                    
+                    if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]"){
                         $_SESSION['state']='profile';
                         $view="profile.php";
                         break;
                     }
-                    // user is registered and an instructor           
-                    else if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[2]=="Y" && $row[3]=="ins"){
+  
+                    /*// user is registered and an instructor           
+                    if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[5]=="ins"){
                         $_SESSION['state']='ins_create';
                         $view="instructor_createclass.php";
                         break;
                     }
                     // user is registered and a student
-                    else if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[2]=="Y" && $row[3]=="stu"){
+                    else if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[5]=="stu"){
                         $_SESSION['state']='stu_join';
                         $view="student_joinclass.php";
                         break;
@@ -65,7 +65,7 @@
                             $errors[]='Invalid';
                         if(!empty($errors))break;
                         
-                    }
+                    }*/
                     
                 }
                 break;
@@ -97,20 +97,11 @@
             }
 
             if(!$error) { //Only create queries when no error occurs
-                // prepare query
-                if (isset($_POST['ins'])){
-                        
-                        $query = pg_prepare($dbconn, "regis_query", "insert into appuser (username, password, firstname, lastname, role) values($1, $2, $3, $4, 'ins')");
-                        $query = pg_execute($dbconn, "regis_query", array($_REQUEST['user'], $_REQUEST['password'], $_REQUEST['firstName'], $_REQUEST['lastName']));
-                        
-                }
-            
-                if (isset($_POST['stu'])){
-                        $query = pg_prepare($dbconn, "regis_query", "insert into appuser (username, password, firstname, lastname, role) values($1, $2, $3, $4, 'stu')");
-                        $query = pg_execute($dbconn, "regis_query", array($_REQUEST['user'], $_REQUEST['password'], $_REQUEST['firstName'], $_REQUEST['lastName']));                        
-                }
-             
- 
+                //prepare query and execute
+                $query = pg_prepare($dbconn, "regis_query", "insert into appuser (username, password, firstname, lastname, role) values($1, $2, $3, $4, '')");
+                $query = pg_execute($dbconn, "regis_query", array($_REQUEST['user'], $_REQUEST['password'], $_REQUEST['firstName'], $_REQUEST['lastName']));
+                $_SESSION['state']="login";
+                $view="login.php"; 
             }
 
             break;
