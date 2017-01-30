@@ -11,5 +11,8 @@ function test_input($data) {
   return $data;
 }
 
+function new1(){
+  $cool='cool';
+}
 ?>
 

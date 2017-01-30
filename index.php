@@ -33,39 +33,13 @@
 			    // perform operation, switching state and view if necessary
                 
                 while ($row = pg_fetch_row($users_query)){
-                    
+                    // if registered go to profile
                     if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]"){
                         $_SESSION['state']='profile';
                         $view="profile.php";
                         break;
-                    }
-  
-                    /*// user is registered and an instructor           
-                    if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[5]=="ins"){
-                        $_SESSION['state']='ins_create';
-                        $view="instructor_createclass.php";
-                        break;
-                    }
-                    // user is registered and a student
-                    else if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[5]=="stu"){
-                        $_SESSION['state']='stu_join';
-                        $view="student_joinclass.php";
-                        break;
-                    }
-                    // work on this
-                    else{   
-                        // validate and set errors
-                        if(empty($_REQUEST['user'])){
-                            $errors[]='user is required';
-                        }
-                        if(empty($_REQUEST['password'])){
-                            $errors[]='password is required';
-                        }
-                        else
-                            $errors[]='Invalid';
-                        if(!empty($errors))break;
-                        
-                    }*/
+                    } 
+                    // TO-DO error checking
                     
                 }
                 break;
@@ -107,6 +81,7 @@
             break;
         case "profile":
             $view="profile.php";
+            
             break;
         
         case 'ins_create':
