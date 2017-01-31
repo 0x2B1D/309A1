@@ -33,6 +33,10 @@ class PHPmodel{
          *         2 if email already exists
          * 
          */
+       $this->dbconn =  
+                pg_connect
+                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
+                        . "user=kathmuha password=10556");
         pg_prepare($this->dbconn, "my_query", 'SELECT * FROM appuser WHERE username = $1');
         $result = pg_execute($this->dbconn,"my_query",array($username));
         if(!empty($result)){
@@ -53,6 +57,10 @@ class PHPmodel{
          *         2 if incorrect password
          *         0 on successs
          */
+        $this->dbconn =  
+                pg_connect
+                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
+                        . "user=kathmuha password=10556");
         $result = pg_prepare($this->dbconn, "my_query", 'SELECT * FROM appuser WHERE username = $1');
         $result = pg_execute($this->dbconn,"my_query",array($username));
         if(empty($result)){
@@ -74,6 +82,10 @@ class PHPmodel{
          *         1 if username already exists
          *         2 if email already exists
          */
+        $this->dbconn =  
+                pg_connect
+                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
+                        . "user=kathmuha password=10556");
         if(($v = $this->checkUsernameEmail($username,$email)) != $this->VALID){
             return $v;
         }
