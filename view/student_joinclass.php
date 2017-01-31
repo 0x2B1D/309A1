@@ -20,9 +20,18 @@
 				<fieldset>
 					<legend>Current Classes</legend>
 					<select>
-						<option>CSC258 Larry Zhang</option>
+                                            <?php
+            
+                                            $array = $_SESSION["model"]->arrayClasses();
+                                            foreach($array as $key=>$value){
+                                                echo("<option> $value </option");
+                                            }
+                                            /*
 						<option>CSC309 Arnold Rosenbloom</option>
 						<option>CSC363 Arnold Rosenbloom</option>
+                                             * 
+                                             */
+                                            ?>
 					</select>
    					<p> <label for="code">code</label><input type="text" name="code"></input> </p>
                                         <p> <input type="submit" />
