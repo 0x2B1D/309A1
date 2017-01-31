@@ -83,11 +83,7 @@ class PHPmodel{
          * returns 0 if valid
          *         1 if username already exists
          *         2 if email already exists
-        =
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");
- */
+        */
         $this->dbconn =  
                 pg_connect
                 ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
@@ -120,6 +116,7 @@ class PHPmodel{
         return $v;
     } 
     
+    
 
     public function updateGet($coursecode, $getValue){
     	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
@@ -130,31 +127,7 @@ class PHPmodel{
 		pg_execute($this->dbconn,"add",array('dontGet',$coursecode));
 
 	}
-
-		
-
-
     }	
-    
-    public function logVote($username,$course,$vote){
-        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
-	pg_prepare($this->dbconn,"log",'INSERT into students(username, course, vote, timestamp) values($1,$2,$3,$4)');
-	$t=time();
-	$dateGo = date("Y-m-d",$t);
-	pg_execute($this->dbconn,"log",array($username,$course,$vote,$dateGo);
-
-   }
-
-    	
-    public function arrayClasses(){
-
-
-	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
-	$result = ($this->dbconn, "get_all", 'select course from courses');
-	$array = pg_fetch_all($result);
-	return $array;
-   }
-   
 
   public function coursePassword($course, $code){
 	/*
@@ -176,6 +149,7 @@ class PHPmodel{
   } 
     
 }
+
 /* 
 we will use this class  for all the database manipulations,checking
  */
