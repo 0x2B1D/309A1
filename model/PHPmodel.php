@@ -177,7 +177,7 @@ class PHPmodel{
         $array=array();
         
         while ($row = pg_fetch_row($courses)){
-            array_push($array,'<option value="'.$row[0].'">'.$row[0].'</option>');
+            array_push($array,'<option value="'.$row[0].' '.$row[1]. '">'.$row[0].' '.$row[1].'</option>');
         }
         return $array;
     }
