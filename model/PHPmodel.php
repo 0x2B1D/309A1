@@ -157,7 +157,7 @@ class PHPmodel{
        
 	
    }
-       public static function arrayClasses(){
+   public static function arrayClasses(){
 
 
 	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
@@ -165,23 +165,34 @@ class PHPmodel{
 	$array = pg_fetch_all($result);
 	return $array;
    }
+    
+    public function newClass($classname, $code, $fname, $lname, $user){
+        
+        $this->dbconn =
+                pg_connect
+                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
+                        . "user=kathmuha password=10556");    
+        // check if course exists
+        $exists=false;
+        $course_query=pg_query($this->dbconn, "select course from courses;");
+        while ($row = pg_fetch_row($course_query)){
+            if ($row[0]==$classname){
+                $exists=true;
+                break;
+            }
+        }
+        
+        // new class
+        if(!$exists){
+            $result=pg_prepare($this->dbconn, "new_class", 'insert into courses (course, code, instructor, insUser, numOfStu, dontGet, get) values($1, $2, $3, $4, 0, 0, 0);');
+            $result=pg_execute($this->dbconn, "new_class", array($classname, $code, $fname ." ". $lname, $user));
+            return 0;
+        }
+        return 1;
+    }
 
     
 }
 
-/* 
-we will use this class  for all the database manipulations,checking
- */
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-
-function new1(){
-  $cool='cool';
-}
 ?>
 

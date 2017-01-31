@@ -130,26 +130,16 @@
             $view="instructor_createclass.php";
 
             if (isset($_POST['submit1'])){
-                // check if course exists
-                $exists=false;
-                $course_query=pg_query($dbconn, "select course from courses;");
-                while ($row = pg_fetch_row($course_query)){
-                    if ($row[0]==$_REQUEST['class']){
-                        $exists=true;
-                        break;
-                    }
-                }
-                // new class
-                if(!$exists){
-                    $result=pg_prepare($dbconn, "new_class", 'insert into courses (course, code, instructor, insUser, numOfStu, dontGet, get) values($1, $2, $3, $4, 0, 0, 0);');
-                    $result=pg_execute($dbconn, "new_class", array($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'] ." ". $_SESSION['lastname'], $_SESSION['username']));
+                
+                $res=$model->newClass($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'], $_SESSION['lastname'], $_SESSION['username']);
+                // class does not exist
+                if ($res==0){
                     //$_SESSION['state']='ins_current';
                     //$view="instructor_currentclass.php";
                     break;
                 }
-                else{
-                    echo "Class already exists";
-                }
+                else{echo "Class already exists";}
+               
             }
             break;
 
