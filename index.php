@@ -69,7 +69,7 @@
                 $view="login.php"; 
             }
             */
-            $code = $model->registerUser($_POST['user'], $_POST['password'], $_POST['firstName'], $_POST['lastName'], $_POST['email']);
+            $code = $model->registerUser($_POST['user'], $_POST['email'], $_POST['password'], $_POST['firstName'], $_POST['lastName']);
             if($code == 0){
                 $_SESSIION['state'] = "profile";
                 $view= "profile.php"; 
