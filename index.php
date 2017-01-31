@@ -21,20 +21,22 @@
 	}
 
 	switch($_SESSION['state']){
-            case "login":
+        case "login":
             // the view we display by default
             $view="login.php";    
             $users_query = pg_query($dbconn, "select * from appuser;"); 
             if(isset($_POST['login'])){
-	   // perform operation, switching state and view if necessary
-            while ($row = pg_fetch_row($users_query)){
+      
+	            // perform operation, switching state and view if necessary
+                while ($row = pg_fetch_row($users_query)){
                     // if registered go to profile
                     if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]"){
                         $_SESSION['username'] = $_REQUEST['user'];
                         $_SESSION['state']='profile';
                         $view="profile.php";
                         break;
-                    } 
+                    }
+                     
                     // TO-DO error checking                   
                 }
                 break;
@@ -72,23 +74,27 @@
             */
             $code = $model->registerUser($_POST['user'], $_POST['email'], $_POST['password'], $_POST['firstName'], $_POST['lastName']);
             if($code == 0){
-                $_SESSION['username'] = $_POST['user'];
-                $_SESSIION['state'] = "profile";
+                
+                //$_SESSION['username'] = $_POST['user'];
+                $_SESSIION['state'] = 'profile';
                 $view= "profile.php"; 
             }
             break;
-        case "profile":
+        
+        case 'profile':
             $view="profile.php";
+            echo "profile";
             if(isset($_POST['Logout'])){
-                session_destroy();
-                 session_save_path("sess");
-                 session_start(); 
-                 $_SESSION['state']='login';
-                 $view = 'login.php';
-                 echo "hyaawww";
-                 break;
+                echo "okkk";
+                //session_destroy();
+                //session_save_path("sess");
+                //session_start(); 
+                $_SESSION['state']='login';
+                $view = "login.php";
+                echo "hyaawww";
+                break;
             }
-            
+            echo "ok"; 
             break;
         
         case 'ins_create':

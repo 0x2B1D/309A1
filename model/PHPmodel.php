@@ -61,6 +61,8 @@ class PHPmodel{
                 pg_connect
                 ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
                         . "user=kathmuha password=10556");
+
+        
         $result = pg_prepare($this->dbconn, "third", 'SELECT * FROM appuser WHERE username = $1 ;');
         $result = pg_execute($this->dbconn,"third",array($username));
         if((pg_num_rows($result) == 0)){
@@ -86,13 +88,32 @@ class PHPmodel{
                 pg_connect
                 ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
                         . "user=kathmuha password=10556");
+       
+      /*  $fields = array('firstName', 'lastName', 'user', 'password', 'email');
+
+        $error = false; //No errors yet
+
+        
+        foreach($fields AS $fieldname) { //Loop through each field
+            if(!isset($_POST[$fieldname]) || empty($_POST[$fieldname])) {
+                echo 'Field '.$fieldname.' missing!<br />'; //Display error with field
+                $error = true;
+            }
+        }
+
+        if(!$error) { //Only create queries when no error occurs
+            pg_prepare($this->dbconn,"new_entry",'INSERT into appuser(username,password,firstname,lastname,email,role) values($1,$2,$3,$4,$5,$6);');
+            pg_execute($this->dbconn,"new_entry",array($username,$password, $firstname, $lastname, $email,NULL ));   
+            return $v;
+        } 
+*/
         if(($v = $this->checkUsernameEmail($username,$email)) != $this->VALID){
             return $v;
         }
+
         pg_prepare($this->dbconn,"new_entry",'INSERT into appuser(username,password,firstname,lastname,email,role) values($1,$2,$3,$4,$5,$6);');
-        pg_execute($this->dbconn,"new_entry",array($username,$password, $firstname, $lastname, $email,NULL ));     
-        echo 'hello';
-        return $v; 
+        pg_execute($this->dbconn,"new_entry",array($username,$password, $firstname, $lastname, $email,NULL ));
+        return $v;
     } 
     
     
