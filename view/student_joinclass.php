@@ -16,10 +16,10 @@
 		</nav>
 		<main>
 			<h1>Class</h1>
-			<form>
+			<form method="post" action="index.php">
 				<fieldset>
 					<legend>Current Classes</legend>
-					<select>
+					<select name="drop">
                          <?php
                             $array=$_SESSION['model']->arrayClasses();
                                 foreach ($array as $val){
