@@ -164,6 +164,7 @@ class PHPmodel{
 	$result = pg_execute($this->dbconn, 'select course from courses;');
         $i = 0;
 	while ($row = pg_fetch_row($result)) {
+            echo "hello";
              $array[$i] = $row[$i];
              $i = $i + 1;
         }
