@@ -37,12 +37,12 @@ class PHPmodel{
                 pg_connect
                 ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
                         . "user=kathmuha password=10556");
-        pg_prepare($this->dbconn, "first", 'SELECT * FROM appuser WHERE username = $1');
+        pg_prepare($this->dbconn, "first", 'SELECT * FROM appuser WHERE username = $1 ;');
         $result = pg_execute($this->dbconn,"first",array($username));
         if(!(pg_num_rows($result) == 0)){
             return $this->USERNAME_ALREADY_EXIST;
         }
-        pg_prepare($this->dbconn, "another", 'SELECT * FROM appuser WHERE email = $1');
+        pg_prepare($this->dbconn, "another", 'SELECT * FROM appuser WHERE email = $1 ;');
         $result = pg_execute($this->dbconn,"another",array($email));
         if(!(pg_num_rows($result) == 0)){
             return $this->EMAIL_ALREADY_EXIST;
@@ -61,12 +61,12 @@ class PHPmodel{
                 pg_connect
                 ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
                         . "user=kathmuha password=10556");
-        $result = pg_prepare($this->dbconn, "third", 'SELECT * FROM appuser WHERE username = $1');
+        $result = pg_prepare($this->dbconn, "third", 'SELECT * FROM appuser WHERE username = $1 ;');
         $result = pg_execute($this->dbconn,"third",array($username));
         if((pg_num_rows($result) == 0)){
             return $this->USERNAME_NO_EXIST;
         }
-        $result = pg_prepare($this->dbconn, "fourth", 'SELECT * FROM appuser WHERE username = $1 AND password = $2');
+        $result = pg_prepare($this->dbconn, "fourth", 'SELECT * FROM appuser WHERE username = $1 AND password = $2;');
         $result = pg_execute($this->dbconn,"fourth",array($username,$password));
         if((pg_num_rows($result) == 0)){
             return $this->WRONG_PASSWORD;
@@ -89,7 +89,7 @@ class PHPmodel{
         if(($v = $this->checkUsernameEmail($username,$email)) != $this->VALID){
             return $v;
         }
-        pg_prepare($this->dbconn,"new_entry",'INSERT into appuser values($1,$2,$3,$4,$5,$6)');
+        pg_prepare($this->dbconn,"new_entry",'INSERT into appuser(username,password,firstname,lastname,email,role) values($1,$2,$3,$4,$5,$6);');
         pg_execute($this->dbconn,"new_entry",array($username,$password, $firstname, $lastname, $email,NULL ));     
         echo 'hello';
         return $v; 
