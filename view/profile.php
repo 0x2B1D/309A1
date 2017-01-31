@@ -10,9 +10,9 @@
 		<nav>
                     <form method="post" action="index.php">
 			<ul>
-                        <li> <input type="submit" name="Class">Class</a>
-                        <li> <input type="submit" name="Profile">
-                        <li> <input type="submit" name="Logout">
+                        <li> <input type="submit" name="Class" value ="Class"></a>
+                        <li> <input type="submit" name="Profile" value = "Profile">
+                        <li> <input type="submit" name="Logout" value = "Profile">
                         </ul>
                     </form>
 		</nav>
