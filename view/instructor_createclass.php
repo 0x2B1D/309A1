@@ -28,9 +28,14 @@
                                 <fieldset>
                                         <legend>Current Classes</legend>
                                         <select>
-                                                <option>CSC258 Larry Zhang</option>
-                                                <option>CSC309 Arnold Rosenbloom</option>
-                                                <option>CSC363 Arnold Rosenbloom</option>
+                                            <option>csc356 ok a</option>
+                                                <?php
+                                                    echo "yo";
+                                                    $courses=pg_query($_SESSION['db'], "select course from courses where insUser=$1", array($_SESSION['username']));
+                                                    foreach ($courses as &$course){
+                                                        ?>
+                                                        <option value="<?php echo $course ?>"><?php echo $course ?></option>
+                                                <?php } ?> 
                                         </select>
                                         <p> <label for="code">code</label><input type="text" name="code"></input> </p>
                                         <p> <input type="submit" />
