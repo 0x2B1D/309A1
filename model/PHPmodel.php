@@ -165,7 +165,7 @@ class PHPmodel{
         $i = 0;
         echo "hello";
 	while ($row = pg_fetch_row($result)) {
-             $array[$i] = $row[$i];
+             $array[$i] = $row[0];
              $i = $i + 1;
         }
 	return $array;
