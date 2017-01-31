@@ -89,7 +89,7 @@ class PHPmodel{
         if(($v = $this->checkUsernameEmail($username,$email)) != $this->VALID){
             return $v;
         }
-        pg_prepare($this->dbconn,"new_entry","INSERT into appuser values('$1','$2','$3','$4','$5',$6)");
+        pg_prepare($this->dbconn,"new_entry",'INSERT into appuser values($1,$2,$3,$4,$5,$6)');
         pg_execute($this->dbconn,"new_entry",array($username,$password, $firstname, $lastname, $email,NULL ));     
         echo 'hello';
         return $v; 
