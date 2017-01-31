@@ -83,7 +83,8 @@
                  session_start(); 
                  $_SESSION['state']='login';
                  $view = 'login.php';
-                
+                 echo "hyaawww";
+                 break;
             }
             
             break;
