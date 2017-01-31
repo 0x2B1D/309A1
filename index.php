@@ -130,8 +130,8 @@
         
         case 'ins_create':
             $view="instructor_createclass.php";
-            $result=pg_prepare($dbconn, "new_class", 'insert into courses (course, code, instructor, numOfStu, dontGet, get) values($1, $2, $3, 0, 0, 0);');
-            $result=pg_execute($dbconn, "new_class", array($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'] . $_SESSION['lastname']));
+            //$result=pg_prepare($dbconn, "new_class", 'insert into courses (course, code, instructor, numOfStu, dontGet, get) values($1, $2, $3, 0, 0, 0);');
+            //$result=pg_execute($dbconn, "new_class", array($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'] . $_SESSION['lastname']));
             break;
 
         case 'stu_join':
