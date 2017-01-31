@@ -165,6 +165,9 @@
 
         case 'stu_join':
             $view="student_joinclass.php";
+            if($_SESSION['model']->coursePassword($_REQUEST['drop'], $_REQUEST['code'])){
+                $view = 'student_currentclass.php';
+            }
             break;
 
         case 'ins_current':
