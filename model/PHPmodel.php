@@ -206,6 +206,19 @@ class PHPmodel{
         return 1;
     }
 
+    public function votes($classname){
+        $result=array();
+        $this->dbconn =
+                pg_connect
+                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
+                        . "user=kathmuha password=10556");
+        $votes_query=pg_query_params($this->dbconn, "select get,dontget from courses where course=$1;", array($classname));
+        array_push($result,pg_fetch_result($votes_query,0,0));
+        array_push($result,pg_fetch_result($votes_query,0,1));
+        array_push($result,pg_fetch_result($votes_query,0,0)+pg_fetch_result($votes_query,0,1));
+        return $result;
+    }
+
     
 }
 

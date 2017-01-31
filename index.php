@@ -130,6 +130,8 @@
 
         case 'ins_create':
             $view="instructor_createclass.php";
+            $ok=$_SESSION['model']->votes("CSC148");
+            
             if (isset($_POST['submit1'])){
 
                 $res=$model->newClass($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'], $_SESSION['lastname'], $_SESSION['username']);
@@ -147,6 +149,7 @@
                 $selectedCourse = $_POST['courseOption'];
                 $courseCode=explode(" ", $selectedCourse);
                 $courseCode=$courseCode[0];
+                $_SESSION['courseCode']=$courseCode;
                 $code_query=pg_query_params($dbconn,"select code from courses where course=$1;", array($courseCode));
                 $code=pg_fetch_result($code_query,0,0);
                 

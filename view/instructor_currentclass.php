@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+        <meta http-equiv="refresh" content="30">
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<style>
@@ -14,6 +15,7 @@
 			}
 		</style>
 		<title>iGetIt</title>
+        
 	</head>
 	<body>
 		<header><h1>iGetIt (instructor)</h1></header>
@@ -29,8 +31,10 @@
 			<form>
 				<fieldset>
 					<legend> <?php echo $_SESSION['selectedCourse'] ?> </legend>
-					<span style="background-color:green; width:50%;" >i Get It</span>
-					<span style="background-color:red;  width:30%;"  >i Don't Get It</span>
+                    
+					<span style="background-color:green; width:<?php $result=$_SESSION['model']->votes($_SESSION['courseCode']); echo $result[0]/$result[2]*100;?>%;">i Get It</span>
+					<span style="background-color:red;  width:<?php $result=$_SESSION['model']->votes($_SESSION['courseCode']); echo $result[1]/$result[2]*100;?>%;" >i Don't Get It</span>
+                    
 				</fieldset>
 			</form>
 		</main>
