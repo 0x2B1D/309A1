@@ -157,7 +157,7 @@ class PHPmodel{
        
 	
    }
-   public static function arrayClasses(){
+   public  function arrayClasses(){
 
         $array  = array();
 	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
