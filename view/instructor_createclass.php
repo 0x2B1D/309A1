@@ -32,7 +32,7 @@
                                                 <option>CSC309 Arnold Rosenbloom</option>
                                                 <option>CSC363 Arnold Rosenbloom</option>
                                         </select>
-                                        <p> <label for="code">code</label><input type="text" name="code"></input> </p>
+                                        <p> <label for="code">code</label><input type="text" name="code2"></input> </p>
                                         <p> <input type="submit" />
                                 </fieldset>
                         </form>

@@ -29,19 +29,43 @@
       
 	            // perform operation, switching state and view if necessary
                 while ($row = pg_fetch_row($users_query)){
-                    // if registered go to profile
-                    if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]"){
+                     // helper function????
+                     $_SESSION['username'] = $_REQUEST['user'];
+                     $result=pg_query_params($dbconn, "SELECT * FROM appuser WHERE username=$1;", array($_SESSION['username']));
+                     $_SESSION['firstname']=pg_fetch_result($result,0,2);
+                     $_SESSION['lastname']=pg_fetch_result($result,0,3);
+                     $_SESSION['email']=pg_fetch_result($result,0,4);
+                    
+                    // if registered go to profile 
+                    if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[5]==NULL){
+                        // helper function????
                         $_SESSION['username'] = $_REQUEST['user'];
+                        $result=pg_query_params($dbconn, "SELECT * FROM appuser WHERE username=$1;", array($_SESSION['username']));
+                        $_SESSION['firstname']=pg_fetch_result($result,0,2);
+                        $_SESSION['lastname']=pg_fetch_result($result,0,3);
+                        $_SESSION['email']=pg_fetch_result($result,0,4);
                         $_SESSION['state']='profile';
                         $view="profile.php";
                         break;
                     }
-                     
+                    
+                    else if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[5]=="ins"){
+                        $_SESSION['state']='ins_create';
+                        $view="instructor_createclass.php";
+                        break;
+                    }
+
+                    else if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[5]=="stu"){
+                        $_SESSION['state']='stu_join';
+                        $view="student_joinclass.php";
+                        break;
+                    }
+
                     // TO-DO error checking                   
                 }
                 break;
             }
-           // if(!empty($errors))break;
+           
             if(isset($_POST['register'])){
                 $_SESSION['state']='register';
                 $view="register.php";
@@ -58,29 +82,15 @@
 
             $error = false; //No errors yet
             
-            /*
-            foreach($fields AS $fieldname) { //Loop through each field
-                if(!isset($_POST[$fieldname]) || empty($_POST[$fieldname])) {
-                    echo 'Field '.$fieldname.' missing!<br />'; //Display error with field
-                    $error = true;
-                }
-            }
-
-            if(!$error) { //Only create queries when no error occurs
-                //prepare query and execute
-                $query = pg_prepare($dbconn, "regis_query", "insert into appuser (username, password, firstname, lastname, role) values($1, $2, $3, $4, '')");
-                $query = pg_execute($dbconn, "regis_query", array($_REQUEST['user'], $_REQUEST['password'], $_REQUEST['firstName'], $_REQUEST['lastName']));
-                $_SESSION['state']="login";
-                $view="login.php"; 
-            }
-            */
             $code = $model->registerUser($_REQUEST['user'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['firstName'], $_REQUEST['lastName']);
             if($code == 0){
                 
+                // helper function????
                 $_SESSION['username'] = $_REQUEST['user'];
-                $_SESSION['firstname']= $_REQUEST['firstName'];
-                $_SESSION['lastname']= $_REQUEST['lastName'];
-                $_SESSION['email']= $_REQUEST['email'];
+                $result=pg_query_params($dbconn, "SELECT * FROM appuser WHERE username=$1;", array($_SESSION['username']));
+                $_SESSION['firstname']=pg_fetch_result($result,0,2);
+                $_SESSION['lastname']=pg_fetch_result($result,0,3);
+                $_SESSION['email']=pg_fetch_result($result,0,4); 
                 $_SESSION['state'] = 'profile';
                 $view= "profile.php"; 
             }
@@ -88,7 +98,7 @@
         
         case 'profile':
             $view="profile.php";
-    
+            
             if (isset($_POST['submit1'])){
                 $answer=$_POST['type'];
                 if ($answer=="ins") {
@@ -120,6 +130,8 @@
         
         case 'ins_create':
             $view="instructor_createclass.php";
+            $result=pg_prepare($dbconn, "new_class", 'insert into courses (course, code, instructor, numOfStu, dontGet, get) values($1, $2, $3, 0, 0, 0);');
+            $result=pg_execute($dbconn, "new_class", array($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'] . $_SESSION['lastname']));
             break;
 
         case 'stu_join':
