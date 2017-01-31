@@ -161,7 +161,7 @@ class PHPmodel{
 
 
 	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
-	$result = pg_execute($this->dbconn, "get_all", 'select course from courses');
+	$result = pg_execute($this->dbconn, "get_all", 'select course from courses;');
 	$array = pg_fetch_all($result);
 	return $array;
    }
