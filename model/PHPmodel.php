@@ -39,6 +39,7 @@ class PHPmodel{
                         . "user=kathmuha password=10556");
         pg_prepare($this->dbconn, "my_query", 'SELECT * FROM appuser WHERE username = $1');
         $result = pg_execute($this->dbconn,"my_query",array($username));
+        echo $result;
         if(!empty($result)){
             return $this->USERNAME_ALREADY_EXIST;
         }
