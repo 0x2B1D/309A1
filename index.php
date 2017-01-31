@@ -131,10 +131,11 @@
         case 'ins_create':
             $view="instructor_createclass.php";
             if (isset($_POST['submit1'])){
-                
+
                 $res=$model->newClass($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'], $_SESSION['lastname'], $_SESSION['username']);
                 // class does not exist
                 if ($res==0){
+                    $_SESSION['selectedCourse']=$_REQUEST['class'] . " " . $_SESSION['firstname'] . " " . $_SESSION['lastname'];
                     $_SESSION['state']='ins_current';
                     $view="instructor_currentclass.php";
                     break;
