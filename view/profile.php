@@ -12,7 +12,7 @@
 			<ul>
                         <li> <input type="submit" name="Class" value ="Class"></a>
                         <li> <input type="submit" name="Profile" value = "Profile">
-                        <li> <input type="submit" name="Logout" value = "Profile">
+                        <li> <input type="submit" name="Logout" value = "Logout">
                         </ul>
                     </form>
 		</nav>
