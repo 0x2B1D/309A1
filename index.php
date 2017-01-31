@@ -9,6 +9,7 @@
     $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10556");
     $users_query = pg_query($dbconn, "select * from appuser;");
     $model = new PHPmodel();
+    $_SESSION["model"] = $model;
 
     /*while ($row = pg_fetch_row($users_query)){
         echo "first $row[0] $row[1]";
