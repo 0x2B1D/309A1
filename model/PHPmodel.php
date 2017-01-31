@@ -159,10 +159,14 @@ class PHPmodel{
    }
    public static function arrayClasses(){
 
-
+        $array  = array();
 	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
 	$result = pg_execute($this->dbconn, "get_all", 'select course from courses;');
-	$array = pg_fetch_all($result);
+        $i = 0;
+	while ($row = pg_fetch_row($result)) {
+             $array[$i] = $row[$i];
+             $i = $i + 1;
+        }
 	return $array;
    }
     
