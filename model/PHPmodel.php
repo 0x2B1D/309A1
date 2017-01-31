@@ -141,6 +141,8 @@ class PHPmodel{
                 pg_connect
                 ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
                         . "user=kathmuha password=10556");
+       echo($course);
+       echo($code);
 	pg_prepare($this->dbconn,'course','select * from courses where course = $1 and code = $2;');
 	$result = pg_execute($this->dbconn,'course',array($course,$code));
 	if (pg_num_rows($result) == 0){
