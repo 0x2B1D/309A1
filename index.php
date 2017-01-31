@@ -135,12 +135,17 @@
                 $res=$model->newClass($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'], $_SESSION['lastname'], $_SESSION['username']);
                 // class does not exist
                 if ($res==0){
-                    $_SESSION['state']='ins_create';
-                    $view="instructor_createclass.php";
+                    $_SESSION['state']='ins_current';
+                    $view="instructor_currentclass.php";
                     break;
                 }
                 else{echo "Class already exists";}
                
+            }
+            else if (isset($_POST['submit2'])){
+                $selectedCourse = $_POST['courseOption'];
+                $selectedCourse=explode(" ", $selectedCourse);
+                       
             }
             break;
 

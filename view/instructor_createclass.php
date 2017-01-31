@@ -24,10 +24,10 @@
                                         <p> <input type="submit" name="submit1" />
 				</fieldset>
 			</form>
- 			<form>
+ 			<form method="post">
                                 <fieldset>
                                         <legend>Current Classes</legend>
-                                        <select>                                       
+                                        <select name="courseOption">                                       
                                                 <?php
                                                     $array=$_SESSION['model']->insClasses($_SESSION['username']);
                                                     foreach ($array as $val){
@@ -36,7 +36,7 @@
                                                 ?> 
                                         </select>
                                         <p> <label for="code">code</label><input type="text" name="code"></input> </p>
-                                        <p> <input type="submit" />
+                                        <p> <input type="submit" name="submit2" />
                                 </fieldset>
                         </form>
 
