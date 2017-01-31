@@ -40,12 +40,12 @@ class PHPmodel{
         pg_prepare($this->dbconn, "my_query", 'SELECT * FROM appuser WHERE username = $1');
         $result = pg_execute($this->dbconn,"my_query",array($username));
         echo $result;
-        if(!(mysql_num_rows($result) == 0)){
+        if(!(pg_num_rows($result) == 0)){
             return $this->USERNAME_ALREADY_EXIST;
         }
         pg_prepare($this->dbconn, "my_query", 'SELECT * FROM appuser WHERE email = $1');
         $result = pg_execute($this->dbconn,"my_query",array($email));
-        if(!(mysql_num_rows($result) == 0)){
+        if(!(pg_num_rows($result) == 0)){
             return $this->EMAIL_ALREADY_EXIST;
         }
         return $this->VALID;
@@ -64,12 +64,12 @@ class PHPmodel{
                         . "user=kathmuha password=10556");
         $result = pg_prepare($this->dbconn, "my_query", 'SELECT * FROM appuser WHERE username = $1');
         $result = pg_execute($this->dbconn,"my_query",array($username));
-        if((mysql_num_rows($result) == 0)){
+        if((pg_num_rows($result) == 0)){
             return $this->USERNAME_NO_EXIST;
         }
         $result = pg_prepare($this->dbconn, "my_query", 'SELECT * FROM appuser WHERE username = $1 AND password = $2');
         $result = pg_execute($this->dbconn,"my_query",array($username,$password));
-        if((mysql_num_rows($result) == 0)){
+        if((pg_num_rows($result) == 0)){
             return $this->WRONG_PASSWORD;
         }
         return $this->VALID;
