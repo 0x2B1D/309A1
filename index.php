@@ -30,6 +30,7 @@
             while ($row = pg_fetch_row($users_query)){
                     // if registered go to profile
                     if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]"){
+                        $_SESSION['username'] = $_REQUEST['user'];
                         $_SESSION['state']='profile';
                         $view="profile.php";
                         break;
@@ -71,6 +72,7 @@
             */
             $code = $model->registerUser($_POST['user'], $_POST['email'], $_POST['password'], $_POST['firstName'], $_POST['lastName']);
             if($code == 0){
+                $_SESSION['username'] = $_POST['user'];
                 $_SESSIION['state'] = "profile";
                 $view= "profile.php"; 
             }
