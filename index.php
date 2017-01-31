@@ -168,12 +168,17 @@
             $view="student_joinclass.php";
             if($_SESSION['model']->coursePassword($_REQUEST['drop'], $_REQUEST['code'])){
                 $view = 'student_currentclass.php';
+                $_SESSION['state'] = 'student_getit';
+               
             }
             break;
 
         case 'ins_current':
             $view="instructor_currentclass.php";
             break;
+        
+        case 'student_getit':
+           break;
 
     }
     require_once "view/view_lib.php";
