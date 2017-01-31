@@ -16,12 +16,12 @@
 		</nav>
 		<main>
 			<h1>Class</h1>
-			<form>
+			<form method="post">
 				<fieldset>
 					<legend>Create Class</legend>
    					<p> <label for="class">class</label><input type="text" name="class"></input> </p>
    					<p> <label for="code">code</label><input type="text" name="code"></input> </p>
-                                        <p> <input type="submit" />
+                                        <p> <input type="submit" name="submit1" />
 				</fieldset>
 			</form>
  			<form>
