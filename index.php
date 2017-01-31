@@ -24,9 +24,9 @@
         case "login":
             // the view we display by default
             $view="login.php";    
-            $users_query = pg_query($dbconn, "select * from appuser;"); 
+            //$users_query = pg_query($dbconn, "select * from appuser;"); 
             if(isset($_POST['login'])){
-      
+                /*
 	            // perform operation, switching state and view if necessary
                 while ($row = pg_fetch_row($users_query)){
                      // helper function????
@@ -70,13 +70,14 @@
                 $_SESSION['state']='register';
                 $view="register.php";
                 break;
+            }*/
             }
             break;         
          
         // essentially the same as profile except no data filled out
-        case 'register':
+        case "register":
 
-            $view="register.php";
+/*            $view="register.php";
     
             $fields = array('firstName', 'lastName', 'user', 'password', 'email');
 
@@ -93,11 +94,11 @@
                 $_SESSION['email']=pg_fetch_result($result,0,4); 
                 $_SESSION['state'] = 'profile';
                 $view= "profile.php"; 
-            }
+            }*/
             break;
         
-        case 'profile':
-            $view="profile.php";
+        case "profile":
+  /*          $view="profile.php";
             
             if (isset($_POST['submit1'])){
                 $answer=$_POST['type'];
@@ -125,17 +126,17 @@
                 
                 break;
             }
-             
+             */
             break;
         
-        case 'ins_create':
-            $view="instructor_createclass.php";
+        case "ins_create":
+            //$view="instructor_createclass.php";
             //$result=pg_prepare($dbconn, "new_class", 'insert into courses (course, code, instructor, numOfStu, dontGet, get) values($1, $2, $3, 0, 0, 0);');
             //$result=pg_execute($dbconn, "new_class", array($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'] . $_SESSION['lastname']));
             break;
 
-        case 'stu_join':
-            $view="student_joinclass.php";
+        case "stu_join":
+            //$view="student_joinclass.php";
             break;
 
 	}
