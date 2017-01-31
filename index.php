@@ -144,7 +144,11 @@
             }
             else if (isset($_POST['submit2'])){
                 $selectedCourse = $_POST['courseOption'];
-                $selectedCourse=explode(" ", $selectedCourse);
+//                $selectedCourse=explode(" ", $selectedCourse);
+                $_SESSION['selectedCourse']=$selectedCourse;
+                $_SESSION['state']='ins_current';
+                $view="instructor_currentclass.php";
+                
                        
             }
             break;

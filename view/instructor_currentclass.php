@@ -28,7 +28,7 @@
 			<h1>Class</h1>
 			<form>
 				<fieldset>
-					<legend> CSC309 Arnold Rosenbloom / greatStuff! </legend>
+					<legend> <?php echo $_SESSION['selectedCourse'] ?> </legend>
 					<span style="background-color:green; width:50%;" >i Get It</span>
 					<span style="background-color:red;  width:30%;"  >i Don't Get It</span>
 				</fieldset>
