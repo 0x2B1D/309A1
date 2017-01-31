@@ -144,10 +144,20 @@
             }
             else if (isset($_POST['submit2'])){
                 $selectedCourse = $_POST['courseOption'];
-//                $selectedCourse=explode(" ", $selectedCourse);
-                $_SESSION['selectedCourse']=$selectedCourse;
-                $_SESSION['state']='ins_current';
-                $view="instructor_currentclass.php";
+                $courseCode=explode(" ", $selectedCourse);
+                $courseCode=$courseCode[0];
+                $code_query=pg_query_params($dbconn,"select code from courses where course=$1;", array($courseCode));
+                $code=pg_fetch_result($code_query,0,0);
+                
+                if ($code==$_REQUEST['code2']){
+                    $_SESSION['selectedCourse']=$selectedCourse;
+                    $_SESSION['state']='ins_current';
+                    $view="instructor_currentclass.php";
+                    break;
+                }
+                else{
+                    echo "wrong code";
+                }
                 
                        
             }

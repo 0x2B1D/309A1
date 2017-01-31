@@ -35,7 +35,7 @@
                                                     } 
                                                 ?> 
                                         </select>
-                                        <p> <label for="code">code</label><input type="text" name="code"></input> </p>
+                                        <p> <label for="code">code</label><input type="text" name="code2"></input> </p>
                                         <p> <input type="submit" name="submit2" />
                                 </fieldset>
                         </form>
