@@ -87,6 +87,7 @@ class PHPmodel{
                 ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
                         . "user=kathmuha password=10556");
         if(($v = $this->checkUsernameEmail($username,$email)) != $this->VALID){
+            echo $v;
             return $v;
         }
         pg_prepare($this->dbconn,"new_entry",'INSERT into appuser values($1,$2,$3,$4,$5,$6)');
