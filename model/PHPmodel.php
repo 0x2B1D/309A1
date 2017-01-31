@@ -167,7 +167,7 @@ class PHPmodel{
 	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10556");
 	$result = pg_query($this->dbconn, 'select course,instructor from courses;');       
 	while ($row = pg_fetch_row($result)) {
-        array_push($array,'<option value="'.$row[0].' '.$row[1]. '">'.$row[0].' '.$row[1].'</option>');
+        array_push($array,'<option value="'.$row[0].'">'.$row[0].' '.$row[1].'</option>');
         
     }
 	return $array;
