@@ -173,7 +173,7 @@ class PHPmodel{
     
     public function insClasses($username){
         $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10556");
-        $courses=pg_query_params($this->dbconn, "select course from courses where insUser=$1", array($username));
+        $courses=pg_query_params($this->dbconn, "select course,instructor from courses where insUser=$1", array($username));
         $array=array();
         
         while ($row = pg_fetch_row($courses)){
