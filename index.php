@@ -48,8 +48,10 @@
                 break;
             }
             break;         
+         
         // essentially the same as profile except no data filled out
         case 'register':
+
             $view="register.php";
     
             $fields = array('firstName', 'lastName', 'user', 'password', 'email');
@@ -72,29 +74,50 @@
                 $view="login.php"; 
             }
             */
-            $code = $model->registerUser($_POST['user'], $_POST['email'], $_POST['password'], $_POST['firstName'], $_POST['lastName']);
+            $code = $model->registerUser($_REQUEST['user'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['firstName'], $_REQUEST['lastName']);
             if($code == 0){
                 
-                //$_SESSION['username'] = $_POST['user'];
-                $_SESSIION['state'] = 'profile';
+                $_SESSION['username'] = $_REQUEST['user'];
+                $_SESSION['state'] = 'profile';
                 $view= "profile.php"; 
             }
             break;
         
         case 'profile':
             $view="profile.php";
-            echo "profile";
+
+            $repop=pg_prepare($dbconn, "repop_query", "select * from appuser where username=$1;");
+            $repop=pg_execute($dbconn, "repop_query", array($_SESSION['username']));
+            $_SESSION['firstname']=pg_fetch_result($repop,0,2);
+            $_SESSION['lastname']=pg_fetch_result($repop,0,3);
+            $_SESSION['email']=pg_fetch_result($repop,0,4);
+       
+            $role_query=pg_query($dbconn, "UPDATE appuser SET role='ins' WHERE username= '" . $_SESSION['username'] . "';"); 
+//            echo $_SESSION['email'];
+             
+            $answer=$_REQUEST['type']; 
+            if ($answer=="ins") {
+                //echo $_SESSION['username'];
+                //pg_query_params('UPDATE appuser SET role=$1 WHERE username=$2;', array('ins', $_SESSION['username']));
+                //$role_query=pg_query($dbconn, "UPDATE appuser SET role='ins' WHERE username= '" . $_SESSION['username'] . "';");
+                
+            }
+
+            //else if (isset($_POST['stu'])) {
+
+            //}
+
+          
             if(isset($_POST['Logout'])){
-                echo "okkk";
-                //session_destroy();
-                //session_save_path("sess");
-                //session_start(); 
+                session_destroy();
+                session_save_path("sess");
+                session_start(); 
                 $_SESSION['state']='login';
                 $view = "login.php";
-                echo "hyaawww";
+                
                 break;
             }
-            echo "ok"; 
+             
             break;
         
         case 'ins_create':

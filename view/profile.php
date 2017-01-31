@@ -21,14 +21,14 @@
 			<form>
 				<fieldset>
 					<legend>Edit Profile</legend>
-					<p> <label for="user">User</label>    <input type="text" name="user"></input> </p>
+					<p> <label for="user">User</label>    <input type="text" name="user" value=<?php echo $_SESSION['username'];?>></input> </p>
 					<p> <label for="password">Password</label><input type="password" name="password"></input> </p>
-					<p> <label for="firstName">First Name</label><input type="text" name="firstName"></input> </p>
-					<p> <label for="lastName">Last Name</label><input type="text" name="lastName"></input> </p>
-					<p> <label for="email">email</label><input type="text" name="email"></input> </p>
+					<p> <label for="firstName">First Name</label><input type="text" name="firstName" value= <?php echo $_SESSION['firstname'];?>></input> </p>
+					<p> <label for="lastName">Last Name</label><input type="text" name="lastName" value= <?php echo $_SESSION['lastname'];?>></input> </p>
+					<p> <label for="email">email</label><input type="text" name="email" value= <?php echo $_SESSION['email'];?>></input> </p>
 					<p> <label for="type">type</label>
-						<input type="radio" name="type">instructor</input> 
-						<input type="radio" name="type">student</input> 
+						<input type="radio" name="type" value='ins'>instructor</input> 
+						<input type="radio" name="type" value='stu'>student</input> 
 					</p>
 					<p> <input type="submit" />
 				</fieldset>
