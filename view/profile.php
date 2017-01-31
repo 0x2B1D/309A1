@@ -18,7 +18,7 @@
 		</nav>
 		<main>
 			<h1>Profile</h1>
-			<form>
+			<form method="post">
 				<fieldset>
 					<legend>Edit Profile</legend>
 					<p> <label for="user">User</label>    <input type="text" name="user" value=<?php echo $_SESSION['username'];?>></input> </p>
@@ -30,7 +30,7 @@
 						<input type="radio" name="type" value='ins'>instructor</input> 
 						<input type="radio" name="type" value='stu'>student</input> 
 					</p>
-					<p> <input type="submit" />
+					<p> <input type="submit" name="submit1"/>
 				</fieldset>
 			</form>
 		</main>

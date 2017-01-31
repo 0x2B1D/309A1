@@ -78,6 +78,9 @@
             if($code == 0){
                 
                 $_SESSION['username'] = $_REQUEST['user'];
+                $_SESSION['firstname']= $_REQUEST['firstName'];
+                $_SESSION['lastname']= $_REQUEST['lastName'];
+                $_SESSION['email']= $_REQUEST['email'];
                 $_SESSION['state'] = 'profile';
                 $view= "profile.php"; 
             }
@@ -85,27 +88,22 @@
         
         case 'profile':
             $view="profile.php";
+    
+            if (isset($_POST['submit1'])){
+                $answer=$_POST['type'];
+                if ($answer=="ins") {
+                    pg_query_params("UPDATE appuser SET role='ins' WHERE username= $1;", array($_SESSION['username']));
+                    $_SESSION['state']='ins_create';
+                    $view="instructor_createclass.php";
+                }
 
-            $repop=pg_prepare($dbconn, "repop_query", "select * from appuser where username=$1;");
-            $repop=pg_execute($dbconn, "repop_query", array($_SESSION['username']));
-            $_SESSION['firstname']=pg_fetch_result($repop,0,2);
-            $_SESSION['lastname']=pg_fetch_result($repop,0,3);
-            $_SESSION['email']=pg_fetch_result($repop,0,4);
-       
-            $role_query=pg_query($dbconn, "UPDATE appuser SET role='ins' WHERE username= '" . $_SESSION['username'] . "';"); 
-//            echo $_SESSION['email'];
-             
-            $answer=$_REQUEST['type']; 
-            if ($answer=="ins") {
-                //echo $_SESSION['username'];
-                //pg_query_params('UPDATE appuser SET role=$1 WHERE username=$2;', array('ins', $_SESSION['username']));
-                //$role_query=pg_query($dbconn, "UPDATE appuser SET role='ins' WHERE username= '" . $_SESSION['username'] . "';");
-                
+                else if ($answer=="stu") {
+                    pg_query_params("UPDATE appuser SET role='stu' WHERE username= $1;", array($_SESSION['username']));
+                    $_SESSION['state']='stu_join';
+                    $view="student_joinclass.php";
+
+                }
             }
-
-            //else if (isset($_POST['stu'])) {
-
-            //}
 
           
             if(isset($_POST['Logout'])){
