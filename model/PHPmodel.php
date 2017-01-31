@@ -163,8 +163,8 @@ class PHPmodel{
 	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
 	$result = pg_execute($this->dbconn, 'select course from courses;');
         $i = 0;
+        echo "hello";
 	while ($row = pg_fetch_row($result)) {
-            echo "hello";
              $array[$i] = $row[$i];
              $i = $i + 1;
         }
