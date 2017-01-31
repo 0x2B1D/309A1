@@ -20,19 +20,13 @@
 				<fieldset>
 					<legend>Current Classes</legend>
 					<select>
-                                            <?php
-            
-                                            $array = $_SESSION["model"]->arrayClasses();
-                                            foreach($array as $key=>$value){
-                                                echo("<option> $value </option");
-                                            }
-                                            /*
-						<option>CSC309 Arnold Rosenbloom</option>
-						<option>CSC363 Arnold Rosenbloom</option>
-                                             * 
-                                             */
-                                            ?>
-					</select>
+                         <?php
+                            $array=$_SESSION['model']->arrayClasses();
+                                foreach ($array as $val){
+                                    echo $val;
+                                }
+                         ?>
+				    </select>
    					<p> <label for="code">code</label><input type="text" name="code"></input> </p>
                                         <p> <input type="submit" />
 				</fieldset>

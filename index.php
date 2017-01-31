@@ -7,6 +7,7 @@
     $errors=array();
     $view="";
     $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10556");
+    $_SESSION['db']=$dbconn;
     $users_query = pg_query($dbconn, "select * from appuser;");
     $model = new PHPmodel();
     $_SESSION["model"] = $model;
@@ -25,6 +26,7 @@
         case "login":
             // the view we display by default
             $view="login.php";
+            
             $users_query = pg_query($dbconn, "select * from appuser;");
             if(isset($_POST['login'])){
                 while ($row = pg_fetch_row($users_query)){
@@ -45,7 +47,7 @@
                         $_SESSION['email']=pg_fetch_result($result,0,4);
                         $_SESSION['state']='profile';
                         $view="profile.php";
-                                                break;
+                        break;
                     }
 
                     else if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[5]=="ins"){
@@ -128,14 +130,13 @@
 
         case 'ins_create':
             $view="instructor_createclass.php";
-
             if (isset($_POST['submit1'])){
                 
                 $res=$model->newClass($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'], $_SESSION['lastname'], $_SESSION['username']);
                 // class does not exist
                 if ($res==0){
-                    //$_SESSION['state']='ins_current';
-                    //$view="instructor_currentclass.php";
+                    $_SESSION['state']='ins_create';
+                    $view="instructor_createclass.php";
                     break;
                 }
                 else{echo "Class already exists";}

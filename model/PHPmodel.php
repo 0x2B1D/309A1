@@ -159,18 +159,27 @@ class PHPmodel{
    }
    public  function arrayClasses(){
 
-        $array  = array();
-	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
-	$result = pg_execute($this->dbconn, 'select course from courses;');
-        $i = 0;
-        echo "hello";
+    $array  = array();
+	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10556");
+	$result = pg_query($this->dbconn, 'select course from courses;');
+        
+       
 	while ($row = pg_fetch_row($result)) {
-             $array[$i] = $row[0];
-             $i = $i + 1;
-        }
+        array_push($array,'<option value="'.$row[0].'">'.$row[0].'</option>');
+    }
 	return $array;
    }
     
+    public function insClasses($username){
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10556");
+        $courses=pg_query_params($this->dbconn, "select course from courses where insUser=$1", array($username));
+        $array=array();
+        
+        while ($row = pg_fetch_row($courses)){
+            array_push($array,'<option value="'.$row[0].'">'.$row[0].'</option>');
+        }
+        return $array;
+    }
     public function newClass($classname, $code, $fname, $lname, $user){
         
         $this->dbconn =

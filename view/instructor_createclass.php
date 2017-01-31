@@ -27,15 +27,13 @@
  			<form>
                                 <fieldset>
                                         <legend>Current Classes</legend>
-                                        <select>
-                                            <option>csc356 ok a</option>
+                                        <select>                                       
                                                 <?php
-                                                    echo "yo";
-                                                    $courses=pg_query($_SESSION['db'], "select course from courses where insUser=$1", array($_SESSION['username']));
-                                                    foreach ($courses as &$course){
-                                                        ?>
-                                                        <option value="<?php echo $course ?>"><?php echo $course ?></option>
-                                                <?php } ?> 
+                                                    $array=$_SESSION['model']->insClasses($_SESSION['username']);
+                                                    foreach ($array as $val){
+                                                        echo $val;
+                                                    } 
+                                                ?> 
                                         </select>
                                         <p> <label for="code">code</label><input type="text" name="code"></input> </p>
                                         <p> <input type="submit" />
