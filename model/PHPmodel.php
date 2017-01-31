@@ -146,8 +146,34 @@ class PHPmodel{
    }
 
     	
+    public function arrayClasses(){
 
-    
+
+	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
+	$result = ($this->dbconn, "get_all", 'select course from courses');
+	$array = pg_fetch_all($result);
+	return $array;
+   }
+   
+
+  public function coursePassword($course, $code){
+	/*
+
+	returns 0 if no match
+	        1 if match
+
+
+	*/
+
+	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
+	pg_prepare($this->dbconn,'course','select * from courses where course=$1 and code=$2');
+	$result = pg_execute($this->dbconn,'course',array($course,$code));
+	if (pg_num_rows($result) == 0){
+		return 0;
+	}
+	return 1;
+
+  } 
     
 }
 /* 
