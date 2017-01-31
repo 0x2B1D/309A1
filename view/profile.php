@@ -8,12 +8,13 @@
 	<body>
 		<header><h1>iGetIt</h1></header>
 		<nav>
+                    <form method="post" action="index.php">
 			<ul>
-                        <li> <a href="">Class</a>
-                        <li> <a href="">Profile</a>
-                        <li> <a href="">Logout</a>
+                        <li> <input type="submit" name="Class">Class</a>
+                        <li> <input type="submit" name="Profile">
+                        <li> <input type="submit" name="Logout">
                         </ul>
-
+                    </form>
 		</nav>
 		<main>
 			<h1>Profile</h1>
