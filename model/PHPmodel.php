@@ -147,6 +147,25 @@ class PHPmodel{
 	return 1;
 
   } 
+  
+      public function logVote($username,$course,$vote){
+       $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
+       pg_prepare($this->dbconn,"log",'INSERT into students(username, course, vote, timestamp) values($1,$2,$3,$4)');
+       $dateGo = date("Y-m-d",$t);
+       pg_execute($this->dbconn,'log',array($username,$course,$vote,$dateGo));
+       
+       
+	
+   }
+       public static function arrayClasses(){
+
+
+	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
+	$result = pg_execute($this->dbconn, "get_all", 'select course from courses');
+	$array = pg_fetch_all($result);
+	return $array;
+   }
+
     
 }
 
