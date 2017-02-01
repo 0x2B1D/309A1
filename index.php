@@ -172,6 +172,10 @@
            $view = "student_currentclass.php";
            $value =$_GET['value'];
            $_SESSION['model']->logVote($_SESSION['username'], $_SESSION['courseCode'], $value);
+           if($_POST['class']){
+               navigateClass('stu');
+               break;               
+           }
           
 
     }
