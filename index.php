@@ -103,7 +103,7 @@
 
 
             if(isset($_POST['Logout'])){
-                logout();
+                $view = logout();
             }
 
             break;
@@ -198,8 +198,7 @@
       session_save_path("sess");
       session_start();
       $_SESSION['state']='login';
-      $view = "login.php";
-      require_once "view/$view";
+      return 'login.php';
          
            
     }
