@@ -9,7 +9,7 @@
 		<header><h1>iGetIt</h1></header>
 		<nav>
               <ul>
-                        <li> <a href="<?php $role=$_SESSION['model']->roleDirection($_SESSION['username']); $_SESSION['state']='stu_join'?>">Class</a>
+                  <li> <a href="index.php?class=1">Class</a>
                         <li> <a href="<?php $_SESSION['state']='profile'?>">Profile</a>
                         <li> <a href="index.php?logout=1">Logout</a>
                         </ul>
