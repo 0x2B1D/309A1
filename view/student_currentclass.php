@@ -29,7 +29,7 @@
 			<h1>Class</h1>
                         <form method="post" action="index.php">
 				<fieldset>
-					<legend> CSC309 Arnold Rosenbloom </legend>
+					<legend><?php echo $_SESSION['selectedCourse'] ?> </legend>
 					<table style="width:100%;">
 						<tr>
 							<td><a style="background-color:green;" href="index.php?value=1">i Get It</a></td>
