@@ -21,8 +21,8 @@
 			<form method="post">
 				<fieldset>
 					<legend>Login</legend>
-					<p> <label for="user">User</label>    <input type="text" name="user"></input> </p>
-					<p> <label for="password">Password</label><input type="password" name="password"></input> </p>
+					<p> <label for="user">User</label>    <input type="text" pattern="[a-zA-Z0-9]+" name="user"></input> </p>
+					<p> <label for="password">Password</label><input type="password" pattern="[a-zA-Z0-9]+" name="password"></input> </p>
                     <p> <input type="submit" name="login" value="Login" />
 					<p> <input type="submit" name="register" value="Register"/>
 
