@@ -19,7 +19,8 @@ $_REQUEST['email']=!empty($_REQUEST['email']) ? $_REQUEST['email'] : '';
 					<p> <label for="email">email</label><input type="text" name="email"></input> </p>
 						 
 					</p>
-					<p> <input type="submit" />
+					<p> <input type="submit" name="submit1" />
+                    <p> <input type="submit" name="back" value="Back"/>
 				</fieldset>
 			</form>
 

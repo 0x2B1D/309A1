@@ -1,5 +1,5 @@
 <?php
-    require_once "model/GuessGame.php";
+    
     require_once "model/PHPmodel.php";
     session_save_path("sess");
     session_start();
@@ -12,11 +12,6 @@
     $model = new PHPmodel();
     $_SESSION["model"] = $model;
 
-    /*while ($row = pg_fetch_row($users_query)){
-        echo "first $row[0] $row[1]";
-        echo "<br/>\n";
-    }*/
-
     /* controller code */
     if(!isset($_SESSION['state'])){
         $_SESSION['state']='login';
@@ -28,7 +23,8 @@
             $view="login.php";
             
             $users_query = pg_query($dbconn, "select * from appuser;");
-            if(isset($_POST['login'])){
+            if(isset($_POST['login'])){ 
+                                    
                 while ($row = pg_fetch_row($users_query)){
                      // helper function????
                      $_SESSION['username'] = $_REQUEST['user'];
@@ -61,11 +57,11 @@
                         $view="student_joinclass.php";
                         break;
                     }
-                   // TO-DO error checking
+                   
                 }
                 break;
             }
-           // if(!empty($errors))break;
+           
             if(isset($_POST['register'])){
                 $_SESSION['state']='register';
                 $view="register.php";
@@ -73,26 +69,32 @@
             }
             break;
 
-        // essentially the same as profile except no data filled out
+       
         case 'register':
             $view="register.php";
-
-            $fields = array('firstName', 'lastName', 'user', 'password', 'email');
-
-            $error = false; //No errors yet
-
-            $code = $model->registerUser($_REQUEST['user'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['firstName'], $_REQUEST['lastName']);
-            if($code == 0){
-
-                // helper function????
-                $_SESSION['username'] = $_REQUEST['user'];
-                $result=pg_query_params($dbconn, "SELECT * FROM appuser WHERE username=$1;", array($_SESSION['username']));
-                $_SESSION['firstname']=pg_fetch_result($result,0,2);
-                $_SESSION['lastname']=pg_fetch_result($result,0,3);
-                $_SESSION['email']=pg_fetch_result($result,0,4);
-                $_SESSION['state'] = 'profile';
-                $view= "profile.php";
-                            }
+            if (isset($_POST['submit1'])){
+                $fields = array('firstName', 'lastName', 'user', 'password', 'email');
+    
+                $error = false; //No errors yet
+    
+                $code = $model->registerUser($_REQUEST['user'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['firstName'], $_REQUEST['lastName']);
+                if($code == 0){
+    
+                    // helper function????
+                    $_SESSION['username'] = $_REQUEST['user'];
+                    $result=$_SESSION['model']->sessSet($_REQUEST['user']);
+                    $result=pg_query_params($dbconn, "SELECT * FROM appuser WHERE username=$1;", array($_SESSION['username']));
+                    $_SESSION['firstname']=pg_fetch_result($result,0,2);
+                    $_SESSION['lastname']=pg_fetch_result($result,0,3);
+                    $_SESSION['email']=pg_fetch_result($result,0,4);
+                    $_SESSION['state'] = 'profile';
+                    $view= "profile.php";
+                }
+            }
+            else if (isset($_POST['back'])){
+                $_SESSION['state']='login';
+                $view="login.php";
+            }
             break;
 
         case 'profile':
