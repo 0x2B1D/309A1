@@ -36,6 +36,11 @@
 							<td><a style="background-color:red;  " href="index.php?value=0">i Don't Get It</a></td>
 						</tr>
 					</table>
+                    <form method="post" >
+
+                        <p> <label for="feedback">Feedback:</label>    <input type="text" name="feed"></input> </p>
+                         <p> <input type="submit" name="submit1"/>
+                    </form>
 				</fieldset>
 			</form>
 		</main>
