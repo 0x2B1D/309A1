@@ -60,10 +60,6 @@
        
         case 'register':
             $view="register.php";
-            if(isset($_POST['Logout'])){
-              echo "helllo";
-              logout();
-            }
             if (isset($_POST['submit1'])){
                 $fields = array('firstName', 'lastName', 'user', 'password', 'email');
     
@@ -85,7 +81,13 @@
 
         case 'profile':
             $view="profile.php";
-
+            
+           $classEscape = $_GET['logout'];
+           if($classEscape){
+               //navigateClass('stu');
+                 logout();
+                 break;               
+           }
             if (isset($_POST['submit1'])){
                 $answer=$_POST['role'];
                 if ($answer==NULL){
