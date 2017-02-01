@@ -19,8 +19,8 @@
 			<form method="post">
 				<fieldset>
 					<legend>Create Class</legend>
-   					<p> <label for="class">class</label><input type="text" name="class"></input> </p>
-   					<p> <label for="code">code</label><input type="text" name="code"></input> </p>
+   					<p> <label for="class">class</label><input type="text" pattern="[a-zA-Z0-9]+" name="class"></input> </p>
+   					<p> <label for="code">code</label><input type="text" pattern="[a-zA-Z0-9]+" name="code"></input> </p>
                                         <p> <input type="submit" name="submit1" />
 				</fieldset>
 			</form>
@@ -35,7 +35,7 @@
                                                     } 
                                                 ?> 
                                         </select>
-                                        <p> <label for="code">code</label><input type="text" name="code2"></input> </p>
+                                        <p> <label for="code">code</label><input type="text" pattern="[a-zA-Z0-9]+" name="code2"></input> </p>
                                         <p> <input type="submit" name="submit2" />
                                 </fieldset>
                         </form>

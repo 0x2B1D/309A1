@@ -12,11 +12,11 @@ $_REQUEST['email']=!empty($_REQUEST['email']) ? $_REQUEST['email'] : '';
 			<h1>Register</h1>
 			<form method="post" action="index.php">
 				<fieldset>
-					<p> <label for="user">User</label>    <input type="text" name="user"></input> </p>
-					<p> <label for="password">Password</label><input type="password" name="password"></input> </p>
-					<p> <label for="firstName">First Name</label><input type="text" name="firstName"></input> </p>
-					<p> <label for="lastName">Last Name</label><input type="text" name="lastName"></input> </p>
-					<p> <label for="email">email</label><input type="text" name="email"></input> </p>
+                                    <p> <label for="user">User</label>    <input type="text" pattern="[a-zA-Z0-9]+" name="user"></input> </p>
+					<p> <label for="password">Password</label><input type="password" pattern="[a-zA-Z0-9]+" name="password"></input> </p>
+					<p> <label for="firstName">First Name</label><input type="text" pattern="[a-zA-Z0-9]+" name="firstName"></input> </p>
+					<p> <label for="lastName">Last Name</label><input type="text" pattern="[a-zA-Z0-9]+" name="lastName"></input> </p>
+					<p> <label for="email">email</label><input type="email" name="email"></input> </p>
 						 
 					</p>
 					<p> <input type="submit" name="submit1" />

@@ -27,7 +27,7 @@
                                 }
                          ?>
 				    </select>
-   					<p> <label for="code">code</label><input type="text" name="code"></input> </p>
+                                        <p> <label for="code">code</label><input type="text" pattern="[a-zA-Z0-9]+" name="code"></input> </p>
                                         <p> <input type="submit" />
 				</fieldset>
 			</form>
