@@ -171,6 +171,7 @@
             break;
 
         case 'ins_current':
+           $view="instructor_currentclass.php";
            $classEscape = $_GET['logout'];
              if($classEscape){
                    //navigateClass('stu');
@@ -182,8 +183,7 @@
                //navigateClass('stu');
                 subClass('ins'); 
                break;               
-           }
-            $view="instructor_currentclass.php";
+           }            
             $result=pg_query_params($dbconn,"select feed from feedback where course=$1", array($_SESSION['selectedCourse']));
             echo pg_fetch_row($result,0,0);
             break;
@@ -218,6 +218,7 @@
             break;
         
         case 'student_getit':
+           $view = "student_currentclass.php";
            $classEscape = $_GET['logout'];
              if($classEscape){
                    //navigateClass('stu');
@@ -235,7 +236,6 @@
                profile();
                break;
            }
-           $view = "student_currentclass.php";
            $va =$_GET['value'];
            $_SESSION['model']->logVote($_SESSION['username'], $_SESSION['courseCode'], $va);
 
