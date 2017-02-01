@@ -245,6 +245,7 @@ class PHPmodel{
         $_SESSION['firstname']=pg_fetch_result($result,0,2);
         $_SESSION['lastname']=pg_fetch_result($result,0,3);
         $_SESSION['email']=pg_fetch_result($result,0,4);
+        $_SESSION['role']=pg_fetch_result($result,0,5);
     }
 }
 
