@@ -196,6 +196,7 @@ function navigateClass($type){
             $view = 'student_joinclass.php';
             $_SESSION['state'] = 'stu_join';
             
+            
         }
 
         if($type == "ins"){
