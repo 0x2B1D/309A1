@@ -80,15 +80,8 @@
             break;
 
         case 'profile':
-            $view="profile.php";
-            
-           $classEscape = $_GET['logout'];
-           if($classEscape){
-               //navigateClass('stu');
-                 logout();
-                 break;               
-           }
-           
+           $view="profile.php";            
+           $classEscape = $_GET['logout'];           
             if (isset($_POST['submit1'])){
                 $answer=$_POST['role'];
                 if ($answer==NULL){
@@ -109,9 +102,25 @@
             }
 
 
-            if(isset($_POST['Logout'])){
-              echo "helllo";
-              logout();
+           if($classEscape){
+               //navigateClass('stu');
+                 logout();
+                 break;               
+           }
+           //for switching to class from profile
+           $escap = $_GET['class'];
+           if($escap){
+            if($_SESSION['model']->roleDirection($_SESSION['username']) == 'ins_create'){
+                subClass('ins');
+                break;
+            }
+            if($_SESSION['model']->roleDirection($_SESSION['username']) == 'stu_join'){
+                subClass('stu');
+                break;
+            }
+           
+           
+               
             }
 
             break;
