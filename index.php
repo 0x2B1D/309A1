@@ -60,6 +60,10 @@
        
         case 'register':
             $view="register.php";
+            if(isset($_POST['Logout'])){
+              echo "helllo";
+              logout();
+            }
             if (isset($_POST['submit1'])){
                 $fields = array('firstName', 'lastName', 'user', 'password', 'email');
     
