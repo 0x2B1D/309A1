@@ -88,6 +88,7 @@
                  logout();
                  break;               
            }
+           
             if (isset($_POST['submit1'])){
                 $answer=$_POST['role'];
                 if ($answer==NULL){
@@ -124,7 +125,12 @@
                    //navigateClass('stu');
                   logout();
                   break;               
-            }    
+            }
+           $classEscape = $_GET['profile'];
+           if($classEscape){
+               profile();
+               break;
+           }
            
             if (isset($_POST['submit1'])){
 
@@ -188,8 +194,13 @@
            $classEscape = $_GET['class'];
            if($classEscape){
                //navigateClass('stu');
-                subClass('stu'); 
+               subClass('stu'); 
                break;               
+           }
+           $classEscape = $_GET['profile'];
+           if($classEscape){
+               profile();
+               break;
            }
             if($_SESSION['model']->coursePassword($_REQUEST['drop'], $_REQUEST['code'])){
                 $selectedCourse = $_POST['drop'];
@@ -213,6 +224,11 @@
                //navigateClass('stu');
                subClass('stu'); 
                break;               
+           }
+           $classEscape = $_GET['profile'];
+           if($classEscape){
+               profile();
+               break;
            }
            $view = "student_currentclass.php";
            $va =$_GET['value'];
@@ -248,6 +264,14 @@
           $_SESSION['state'] = 'ins_create';
           
       }
+      
+    function profile(){
+        global $view;
+        global $_SESSION;
+        $view = 'profile.php';
+        $_SESSION['state'] = 'profile';                     
+        
+    }
       
         
     }
