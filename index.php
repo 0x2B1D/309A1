@@ -119,6 +119,12 @@
         case 'ins_create':
 
             $view="instructor_createclass.php";
+             $classEscape = $_GET['logout'];
+             if($classEscape){
+                   //navigateClass('stu');
+                  logout();
+                  break;               
+            }    
            
             if (isset($_POST['submit1'])){
 
@@ -156,6 +162,12 @@
             break;
 
         case 'ins_current':
+           $classEscape = $_GET['logout'];
+             if($classEscape){
+                   //navigateClass('stu');
+                  logout();
+                  break;               
+            }    
            $classEscape = $_GET['class'];
            if($classEscape){
                //navigateClass('stu');
@@ -168,6 +180,12 @@
 
         case 'stu_join':
            $view="student_joinclass.php";
+           $classEscape = $_GET['logout'];
+             if($classEscape){
+                   //navigateClass('stu');
+                  logout();
+                  break;               
+            }    
            $classEscape = $_GET['class'];
            if($classEscape){
                //navigateClass('stu');
@@ -184,6 +202,12 @@
             break;
         
         case 'student_getit':
+           $classEscape = $_GET['logout'];
+             if($classEscape){
+                   //navigateClass('stu');
+                  logout();
+                  break;               
+            }    
            $classEscape = $_GET['class'];
            if($classEscape){
                //navigateClass('stu');
