@@ -36,8 +36,11 @@
 					<span style="background-color:red;  width:<?php $result=$_SESSION['model']->votes($_SESSION['courseCode']); echo $result[1]/$result[2]*100;?>%;" >i Don't Get It</span>
                     
 				</fieldset>
+                <p> <label for="feedback">Feedback:</label><br></br>
+                 
 			</form>
 		</main>
+         
 		<footer>
 		</footer>
 	</body>

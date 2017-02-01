@@ -177,7 +177,12 @@
                    //navigateClass('stu');
                   logout();
                   break;               
-            }    
+            }
+            $classEscape = $_GET['profile'];
+           if($classEscape){
+               profile();
+               break;
+           }    
            $classEscape = $_GET['class'];
            if($classEscape){
                //navigateClass('stu');
