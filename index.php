@@ -265,14 +265,15 @@
           
       }
       
+
+      
+        
+    }
     function profile(){
         global $view;
         global $_SESSION;
         $view = 'profile.php';
         $_SESSION['state'] = 'profile';                     
-        
-    }
-      
         
     }
     
