@@ -180,11 +180,16 @@
             if($_SESSION['model']->coursePassword($_REQUEST['drop'], $_REQUEST['code'])){
                 $view = 'student_currentclass.php';
                 $_SESSION['state'] = 'student_getit';
+                $_SESSION['courseCode'] = $_REQUEST['code'];
                
             }
             break;
         
         case 'student_getit':
+           $view = "student_currentclass.php";
+           if($_GET['value']){
+               $_SESSION['model']->logVote($_SESSION['username'], $_SESSION['courseCode'], $vote);
+           }
            break;
 
     }
