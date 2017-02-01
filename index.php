@@ -38,7 +38,7 @@
                         $_SESSION['state']='ins_create';
                         $view="instructor_createclass.php";
                         break;
-                                                       }
+                    }
 
                     else if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[5]=="stu"){
                         $_SESSION['state']='stu_join';
