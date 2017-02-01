@@ -126,7 +126,7 @@
                    //navigateClass('stu');
                     
                   logout();
-                    echo "asdffds";
+                   
                   break;               
             }
            $classEscape = $_GET['profile'];
