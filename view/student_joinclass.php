@@ -9,9 +9,9 @@
 		<header><h1>iGetIt (student)</h1></header>
 		<nav>
 			<ul>
-                        <li> <a href="">Class</a>
-                        <li> <a href="">Profile</a>
-                        <li> <a href="">Logout</a>
+                        <li> <a href="index.php?class=1">Class</a>
+                        <li> <a href="index.php?profile=1">Profile</a>
+                        <li> <a href="index.php?logout=1">Logout</a>
                         </ul>
 		</nav>
 		<main>
