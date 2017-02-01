@@ -1,0 +1,30 @@
+
+drop table appuser; 
+drop table courses; 
+drop table students; 
+create table appuser ( 
+    username varchar(20) primary key, 
+    password varchar(20),
+    firstname varchar(20),
+    lastname varchar(20),
+    email varchar (50), 
+    role varchar(20)
+);
+
+create table courses (
+    course varchar(20) primary key,
+    code varchar(20),
+    instructor varchar(20),
+    insUser varchar(20),
+    numOfStu int,
+    dontGet int,
+    get int
+);
+
+create table students (
+    username varchar(20),
+    course varchar(20),
+    vote int,
+    time_stamp timestamp
+);
+\dt

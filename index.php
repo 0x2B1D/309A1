@@ -3,10 +3,14 @@
     require_once "model/PHPmodel.php";
     session_save_path("sess");
     session_start();
-    ini_set('display_errors', 'On');
+    //ini_set('display_errors', 'On');
     $errors=array();
     $view="";
-    $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10556");
+    $_SESSION['dbname']=$argv[1];
+    $_SESSION['utorid']=$argv[2];
+    $_SESSION['pass']=$argv[3];
+    //echo $_SESSION['dbname'];
+    $dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
     $_SESSION['db']=$dbconn;
     $users_query = pg_query($dbconn, "select * from appuser;");
     $model = new PHPmodel();

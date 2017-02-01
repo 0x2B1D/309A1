@@ -16,10 +16,7 @@ class PHPmodel{
     
     
     public function _construct(){
-        $this->dbconn =  
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
         $this->USERNAME_NO_EXIST = 1;
         $this->WRONG_PASSWORD = 2;
         $this->VALID = 0;
@@ -33,10 +30,7 @@ class PHPmodel{
          *         2 if email already exists
          * 
          */
-       $this->dbconn =  
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']); 
         pg_prepare($this->dbconn, "first", 'SELECT * FROM appuser WHERE username = $1 ;');
         $result = pg_execute($this->dbconn,"first",array($username));
         if(!(pg_num_rows($result) == 0)){
@@ -57,12 +51,7 @@ class PHPmodel{
          *         2 if incorrect password
          *         0 on successs
          */
-        $this->dbconn =  
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");
-
-        
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);        
         $result = pg_prepare($this->dbconn, "third", 'SELECT * FROM appuser WHERE username = $1 ;');
         $result = pg_execute($this->dbconn,"third",array($username));
         if((pg_num_rows($result) == 0)){
@@ -85,11 +74,7 @@ class PHPmodel{
          *         2 if email already exists
          *         3 if empty
         */
-        $this->dbconn =  
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");
-       
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']); 
         $fields = array('firstName', 'lastName', 'user', 'password', 'email');
 
         $error = false; //No errors yet
@@ -116,8 +101,7 @@ class PHPmodel{
     
 
     public function updateGet($coursecode, $getValue){
-    	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 ", "user=kathmuha password=10556");
-	pg_prepare($this->dbconn,"add",'update courses set $1=$1+1 where course=$2');
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
 	if($getValue){
 		pg_execute($this->dbconn,"add",array('get',$coursecode));
 	}else{
@@ -134,10 +118,7 @@ class PHPmodel{
 
 
 	*/
-       $this->dbconn =  
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");
+    $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
 	pg_prepare($this->dbconn,'course','select * from courses where course = $1 and code = $2;');
 	$result = pg_execute($this->dbconn,'course',array($course,$code));
 	if (pg_num_rows($result) == 0){
@@ -149,10 +130,7 @@ class PHPmodel{
   
       public function logVote($username,$course,$vote){
           
-       $this->dbconn =  
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
        $t = time();
        pg_prepare($this->dbconn,"log",'INSERT into students(username, course, vote, time_stamp) values($1,$2,$3,$4);');
        $dateGo = date("Y-m-d",$t);
@@ -170,7 +148,7 @@ class PHPmodel{
    public  function arrayClasses(){
 
     $array  = array();
-	$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10556");
+    $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
 	$result = pg_query($this->dbconn, 'select course,instructor from courses;');       
 	while ($row = pg_fetch_row($result)) {
         array_push($array,'<option value="'.$row[0].'">'.$row[0].' '.$row[1].'</option>');
@@ -180,7 +158,7 @@ class PHPmodel{
    }
     
     public function insClasses($username){
-        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 user=kathmuha password=10556");
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
         $courses=pg_query_params($this->dbconn, "select course,instructor from courses where insUser=$1", array($username));
         $array=array();
         
@@ -190,12 +168,8 @@ class PHPmodel{
         return $array;
     }
     public function newClass($classname, $code, $fname, $lname, $user){
-        
-        $this->dbconn =
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");    
-        // check if course exists
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);        
+         // check if course exists
         $exists=false;
         $course_query=pg_query($this->dbconn, "select course from courses;");
         while ($row = pg_fetch_row($course_query)){
@@ -216,10 +190,7 @@ class PHPmodel{
 
     public function votes($classname){
         $result=array();
-        $this->dbconn =
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']); 
         $votes_query=pg_query_params($this->dbconn, "select get,dontget from courses where course=$1;", array($classname));
         array_push($result,pg_fetch_result($votes_query,0,0));
         array_push($result,pg_fetch_result($votes_query,0,1));
@@ -228,10 +199,7 @@ class PHPmodel{
     }
 
     public function roleDirection($username){
-        $this->dbconn =
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");
+      $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']); 
         $role_query=pg_query_params($this->dbconn, "select role from appuser where username=$1;", array($username));
         $role=pg_fetch_result($role_query,0,0);
         if ($role=='ins'){
@@ -242,10 +210,7 @@ class PHPmodel{
     }
     
     public function sessSet($user){
-        $this->dbconn =
-                pg_connect
-                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
-                        . "user=kathmuha password=10556");
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
         $_SESSION['username'] = $user;          
         $result=pg_query_params($this->dbconn, "SELECT * FROM appuser WHERE username=$1;", array($user));
         $_SESSION['firstname']=pg_fetch_result($result,0,2);
