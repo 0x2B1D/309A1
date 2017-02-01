@@ -171,7 +171,9 @@
         case 'student_getit':
            $classEscape = $_GET['class'];
            if($classEscape){
-               navigateClass('stu');
+               //navigateClass('stu');
+                $view = 'student_joinclass.php';
+                $_SESSION['state'] = 'stu_join';
                break;               
            }
            $view = "student_currentclass.php";
