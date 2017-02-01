@@ -17,7 +17,7 @@
        </nav>
 		<main>
 			<h1>Profile</h1>
-			<form method="post">
+			<form method="post" action="index.php">
 				<fieldset>
 					<legend>Edit Profile</legend>
 					<p> <label for="user">User</label>    <input type="text" name="user" value=<?php echo $_SESSION['username'];?>></input> </p>
@@ -26,8 +26,8 @@
 					<p> <label for="lastName">Last Name</label><input type="text" name="lastName" value= <?php echo $_SESSION['lastname'];?>></input> </p>
 					<p> <label for="email">email</label><input type="text" name="email" value= <?php echo $_SESSION['email'];?>></input> </p>
 					<p> <label for="type">type</label>
-						<input type="radio" name="type" value='ins'>instructor</input> 
-						<input type="radio" name="type" value='stu'>student</input> 
+						<input type="radio" name="role" value='ins'>instructor</input> 
+						<input type="radio" name="role" value='stu'>student</input> 
 					</p>
 					<p> <input type="submit" name="submit1"/>
 				</fieldset>
