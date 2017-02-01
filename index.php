@@ -190,6 +190,23 @@
     }
     require_once "view/view_lib.php";
     require_once "view/$view";
+    
+    //HELPER FUNCTIONS TO SWITCH BETWEEN CLASS AND PROFILE
+function navigateClass($type){        
+        if ($type == "stu"){
+            $view = 'student_joinclass.php';
+            $_SESSION['state'] = 'stu_join';
+            
+        }
+
+        if($type == "ins"){
+            $view = "instructor_createclass.php";
+            $_SESSION['state'] = 'ins_create';
+            
+            
+        }
+    }
+
 ?>
                            
                                                                                                 
