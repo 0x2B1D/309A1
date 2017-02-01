@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <meta http-equiv="refresh" content="30">
+        <meta http-equiv="refresh" content="200">
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<style>
@@ -37,7 +37,12 @@
                     
 				</fieldset>
                 <p> <label for="feedback">Feedback:</label><br></br>
-                 
+                <?php
+                    $result=pg_query_params($_SESSION['db'],"select feedback, time_stamp from feedback where course=$1;", array($_SESSION['courseCode']));
+                    while($row=pg_fetch_row($result)){
+                        echo $row[1]."<br>".$row[0]."<br>";
+                    }
+                ?> 
 			</form>
 		</main>
          

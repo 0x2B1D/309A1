@@ -157,6 +157,12 @@ class PHPmodel{
        pg_prepare($this->dbconn,"log",'INSERT into students(username, course, vote, time_stamp) values($1,$2,$3,$4);');
        $dateGo = date("Y-m-d",$t);
        pg_execute($this->dbconn,'log',array($username,$course,$vote,$dateGo));
+       if ($vote==0){
+            pg_query_params($this->dbconn,"update courses set dontget=dontget+1 where code=$1;", array($course));
+        }
+        else{
+            pg_query_params($this->dbconn,"update courses set get=get+1 where code=$1;", array($course));
+        }
        
        
 	
