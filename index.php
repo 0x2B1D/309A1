@@ -253,6 +253,8 @@
     function logout(){
       global $view;
       global $_SESSION;
+      setcookie(session_name(), '', 100);
+      session_unset();
       session_destroy();
       session_save_path("sess");
       session_start();
