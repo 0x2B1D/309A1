@@ -95,8 +95,11 @@
             $view="profile.php";
 
             if (isset($_POST['submit1'])){
-                $answer=$_POST['type'];
-                if ($answer=="ins") {
+                $answer=$_POST['role'];
+                if ($answer==NULL){
+                    echo "Select a type please";
+                }
+                else if ($answer=="ins") {
                     pg_query_params("UPDATE appuser SET role='ins' WHERE username= $1;", array($_SESSION['username']));
                     $_SESSION['state']='ins_create';
                     $view="instructor_createclass.php";
@@ -127,11 +130,7 @@
         case 'ins_create':
             
             $view="instructor_createclass.php";
-            echo  "here";
-            //$role=$_SESSION['model']->roleDirection($_SESSION['username']); 
-            //$_SESSION['state']=$role;
-            echo $role;
-            
+           
             if (isset($_POST['submit1'])){
 
                 $res=$model->newClass($_REQUEST['class'], $_REQUEST['code'], $_SESSION['firstname'], $_SESSION['lastname'], $_SESSION['username']);

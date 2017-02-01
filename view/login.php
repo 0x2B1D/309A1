@@ -28,7 +28,7 @@
 
 				</fieldset>
 			</form>
-			<a href=>New Member</a>
+			
 		</main>
 		<footer>
 		</footer>

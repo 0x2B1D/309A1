@@ -83,13 +83,14 @@ class PHPmodel{
          * returns 0 if valid
          *         1 if username already exists
          *         2 if email already exists
+         *         3 if empty
         */
         $this->dbconn =  
                 pg_connect
                 ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
                         . "user=kathmuha password=10556");
        
-      /*  $fields = array('firstName', 'lastName', 'user', 'password', 'email');
+        $fields = array('firstName', 'lastName', 'user', 'password', 'email');
 
         $error = false; //No errors yet
 
@@ -98,15 +99,11 @@ class PHPmodel{
             if(!isset($_POST[$fieldname]) || empty($_POST[$fieldname])) {
                 echo 'Field '.$fieldname.' missing!<br />'; //Display error with field
                 $error = true;
+                return 3;
             }
         }
 
-        if(!$error) { //Only create queries when no error occurs
-            pg_prepare($this->dbconn,"new_entry",'INSERT into appuser(username,password,firstname,lastname,email,role) values($1,$2,$3,$4,$5,$6);');
-            pg_execute($this->dbconn,"new_entry",array($username,$password, $firstname, $lastname, $email,NULL ));   
-            return $v;
-        } 
-*/
+
         if(($v = $this->checkUsernameEmail($username,$email)) != $this->VALID){
             return $v;
         }
