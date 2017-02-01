@@ -171,8 +171,7 @@
            $classEscape = $_GET['class'];
            if($classEscape){
                //navigateClass('stu');
-                $view = 'instructor_createclass.php';
-                $_SESSION['state'] = 'stu_join';
+                subClass('ins'); 
                break;               
            }
             $view="instructor_currentclass.php";
@@ -189,8 +188,7 @@
            $classEscape = $_GET['class'];
            if($classEscape){
                //navigateClass('stu');
-                $view = 'student_joinclass.php';
-                $_SESSION['state'] = 'stu_join';
+                subClass('stu'); 
                break;               
            }
             if($_SESSION['model']->coursePassword($_REQUEST['drop'], $_REQUEST['code'])){
@@ -211,8 +209,7 @@
            $classEscape = $_GET['class'];
            if($classEscape){
                //navigateClass('stu');
-                $view = 'student_joinclass.php';
-                $_SESSION['state'] = 'stu_join';
+               subClass('stu'); 
                break;               
            }
            $view = "student_currentclass.php";
@@ -235,6 +232,24 @@
          
            
     }
+    
+    function subClass($type){
+      global $view;
+      global $_SESSION;
+      if(type == 'stu'){
+        $view = 'student_joinclass.php';
+        $_SESSION['state'] = 'stu_join';
+          
+      }
+      if(type == 'ins'){
+          $view = 'instructor_createclass.php';
+          $_SESSION['state'] = 'ins_create';
+          
+      }
+      
+        
+    }
+    
     require_once "view/view_lib.php";
     require_once "view/$view";
 
