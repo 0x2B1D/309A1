@@ -103,20 +103,14 @@
 
 
             if(isset($_POST['Logout'])){
-                session_destroy();
-                session_save_path("sess");
-                session_start();
-                $_SESSION['state']='login';
-                $view = "login.php";
-
-                break;
+                logout();
             }
 
             break;
 
 
         case 'ins_create':
-            
+
             $view="instructor_createclass.php";
            
             if (isset($_POST['submit1'])){
@@ -155,11 +149,25 @@
             break;
 
         case 'ins_current':
+           $classEscape = $_GET['class'];
+           if($classEscape){
+               //navigateClass('stu');
+                $view = 'instructor_createclass.php';
+                $_SESSION['state'] = 'stu_join';
+               break;               
+           }
             $view="instructor_currentclass.php";
             break;
 
         case 'stu_join':
-            $view="student_joinclass.php";
+           $view="student_joinclass.php";
+           $classEscape = $_GET['class'];
+           if($classEscape){
+               //navigateClass('stu');
+                $view = 'student_joinclass.php';
+                $_SESSION['state'] = 'stu_join';
+               break;               
+           }
             if($_SESSION['model']->coursePassword($_REQUEST['drop'], $_REQUEST['code'])){
                 $view = 'student_currentclass.php';
                 $_SESSION['state'] = 'student_getit';
@@ -184,25 +192,18 @@
           
 
     }
+    
+    function logout(){
+      session_destroy();
+      session_save_path("sess");
+      session_start();
+      $_SESSION['state']='login';
+      $view = "login.php";
+         
+           
+    }
     require_once "view/view_lib.php";
     require_once "view/$view";
-    
-    //HELPER FUNCTIONS TO SWITCH BETWEEN CLASS AND PROFILE
-function navigateClass($type){        
-        if ($type == "stu"){
-            $view = 'student_joinclass.php';
-            $_SESSION['state'] = 'stu_join';
-            
-            
-        }
-
-        if($type == "ins"){
-            $view = "instructor_createclass.php";
-            $_SESSION['state'] = 'ins_create';
-            
-            
-        }
-    }
 
 ?>
                            
