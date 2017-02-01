@@ -80,13 +80,7 @@
                 $code = $model->registerUser($_REQUEST['user'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['firstName'], $_REQUEST['lastName']);
                 if($code == 0){
     
-                    // helper function????
-                    $_SESSION['username'] = $_REQUEST['user'];
                     $result=$_SESSION['model']->sessSet($_REQUEST['user']);
-                    $result=pg_query_params($dbconn, "SELECT * FROM appuser WHERE username=$1;", array($_SESSION['username']));
-                    $_SESSION['firstname']=pg_fetch_result($result,0,2);
-                    $_SESSION['lastname']=pg_fetch_result($result,0,3);
-                    $_SESSION['email']=pg_fetch_result($result,0,4);
                     $_SESSION['state'] = 'profile';
                     $view= "profile.php";
                 }

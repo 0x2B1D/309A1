@@ -235,6 +235,18 @@ class PHPmodel{
         return 'stu_join';
         
     }
+    
+    public function sessSet($user){
+        $this->dbconn =
+                pg_connect
+                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
+                        . "user=kathmuha password=10556");
+        $_SESSION['username'] = $user;          
+        $result=pg_query_params($this->dbconn, "SELECT * FROM appuser WHERE username=$1;", array($user));
+        $_SESSION['firstname']=pg_fetch_result($result,0,2);
+        $_SESSION['lastname']=pg_fetch_result($result,0,3);
+        $_SESSION['email']=pg_fetch_result($result,0,4);
+    }
 }
 
 ?>
