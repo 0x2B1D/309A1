@@ -217,7 +217,13 @@
            $view = "student_currentclass.php";
            $va =$_GET['value'];
            $_SESSION['model']->logVote($_SESSION['username'], $_SESSION['courseCode'], $va);
-           
+
+           if(isset($_POST['submit1'])){
+                $t = time();
+                pg_prepare($dbconn,"feed_query",'INSERT into feedback(username, course, feedback, time_stamp) values($1,$2,$3,$4);');
+                $dateGo = date("Y-m-d",$t);
+                pg_execute($dbconn,'feed_query',array($_SESSION['username'],$_SESSION['selectedCourse'],$_REQUEST['feed'],$dateGo));              
+            }
 
           
 
