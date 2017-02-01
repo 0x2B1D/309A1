@@ -8,14 +8,13 @@
 	<body>
 		<header><h1>iGetIt</h1></header>
 		<nav>
-                    <form method="post" action="index.php">
-			<ul>
-                        <li> <input type="submit" name="Class" value ="Class"></a>
-                        <li> <input type="submit" name="Profile" value = "Profile">
-                        <li> <input type="submit" name="Logout" value = "Logout">
+              <ul>
+                        <li> <a href="<?php $role=$_SESSION['model']->roleDirection($_SESSION['username']); $_SESSION['state']='stu_join'?>">Class</a>
+                        <li> <a href="<?php $_SESSION['state']='profile'?>">Profile</a>
+                        <li> <a href="">Logout</a>
                         </ul>
-                    </form>
-		</nav>
+
+       </nav>
 		<main>
 			<h1>Profile</h1>
 			<form method="post">

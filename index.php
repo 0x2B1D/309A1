@@ -129,8 +129,12 @@
 
 
         case 'ins_create':
+            
             $view="instructor_createclass.php";
-            $ok=$_SESSION['model']->votes("CSC148");
+            echo  "here";
+            //$role=$_SESSION['model']->roleDirection($_SESSION['username']); 
+            //$_SESSION['state']=$role;
+            echo $role;
             
             if (isset($_POST['submit1'])){
 

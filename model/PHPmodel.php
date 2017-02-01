@@ -219,7 +219,19 @@ class PHPmodel{
         return $result;
     }
 
-    
+    public function roleDirection($username){
+        $this->dbconn =
+                pg_connect
+                ("host=mcsdb.utm.utoronto.ca dbname=kathmuha_309 "
+                        . "user=kathmuha password=10556");
+        $role_query=pg_query_params($this->dbconn, "select role from appuser where username=$1;", array($username));
+        $role=pg_fetch_result($role_query,0,0);
+        if ($role=='ins'){
+            return 'ins_create';
+        }
+        return 'stu_join';
+        
+    }
 }
 
 ?>
