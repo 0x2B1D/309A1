@@ -199,6 +199,7 @@
       session_start();
       $_SESSION['state']='login';
       $view = "login.php";
+      require_once "view/$view";
          
            
     }
