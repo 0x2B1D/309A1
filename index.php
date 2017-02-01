@@ -187,8 +187,8 @@
         
         case 'student_getit':
            $view = "student_currentclass.php";
-           if($_GET['value']){
-               $_SESSION['model']->logVote($_SESSION['username'], $_SESSION['courseCode'], $vote);
+           if($value =$_GET['value']){
+               $_SESSION['model']->logVote($_SESSION['username'], $_SESSION['courseCode'], $value);
            }
            break;
 
