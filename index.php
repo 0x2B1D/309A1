@@ -169,14 +169,15 @@
             break;
         
         case 'student_getit':
-           $view = "student_currentclass.php";
-           $va =$_GET['value'];
-           $_SESSION['model']->logVote($_SESSION['username'], $_SESSION['courseCode'], $va);
-           $classEscape = $_GET['class'];
            if($classEscape){
                navigateClass('stu');
                break;               
            }
+           $view = "student_currentclass.php";
+           $va =$_GET['value'];
+           $_SESSION['model']->logVote($_SESSION['username'], $_SESSION['courseCode'], $va);
+           $classEscape = $_GET['class'];
+
           
 
     }
