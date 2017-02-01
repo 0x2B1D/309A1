@@ -120,10 +120,13 @@
         case 'ins_create':
 
             $view="instructor_createclass.php";
+            
              $classEscape = $_GET['logout'];
              if($classEscape){
                    //navigateClass('stu');
+                    
                   logout();
+                    echo "asdffds";
                   break;               
             }
            $classEscape = $_GET['profile'];
@@ -181,6 +184,8 @@
                break;               
            }
             $view="instructor_currentclass.php";
+            $result=pg_query_params($dbconn,"select feed from feedback where course=$1", array($_SESSION['selectedCourse']));
+            echo pg_fetch_row($result,0,0);
             break;
 
         case 'stu_join':
@@ -241,7 +246,7 @@
                 pg_execute($dbconn,'feed_query',array($_SESSION['username'],$_SESSION['selectedCourse'],$_REQUEST['feed'],$dateGo));              
             }
 
-          
+            break; 
 
     }
     
