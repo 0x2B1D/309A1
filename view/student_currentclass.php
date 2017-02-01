@@ -32,8 +32,8 @@
 					<legend> CSC309 Arnold Rosenbloom </legend>
 					<table style="width:100%;">
 						<tr>
-							<td><a style="background-color:green;" href="index.php?1">i Get It</a></td>
-							<td><a style="background-color:red;  " href="index.php?0">i Don't Get It</a></td>
+							<td><a style="background-color:green;" href="index.php?value=1">i Get It</a></td>
+							<td><a style="background-color:red;  " href="index.php?value=0">i Don't Get It</a></td>
 						</tr>
 					</table>
 				</fieldset>
