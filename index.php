@@ -233,15 +233,15 @@
            
     }
     
-    function subClass($type){
+    function subClass($person){
       global $view;
       global $_SESSION;
-      if(type == 'stu'){
+      if($person == 'stu'){
         $view = 'student_joinclass.php';
         $_SESSION['state'] = 'stu_join';
           
       }
-      if(type == 'ins'){
+      if($person == 'ins'){
           $view = 'instructor_createclass.php';
           $_SESSION['state'] = 'ins_create';
           
