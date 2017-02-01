@@ -103,6 +103,10 @@
 
 
             if(isset($_POST['Logout'])){
+                session_destroy();
+                session_save_path("sess");
+                session_start();
+                $_SESSION['state']='login';
                 $view = logout();
             }
 
