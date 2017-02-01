@@ -194,6 +194,8 @@
                break;               
            }
             if($_SESSION['model']->coursePassword($_REQUEST['drop'], $_REQUEST['code'])){
+                $selectedCourse = $_POST['drop'];
+                $_SESSION['selectedCourse']=$selectedCourse;
                 $view = 'student_currentclass.php';
                 $_SESSION['state'] = 'student_getit';
                 $_SESSION['courseCode'] = $_REQUEST['code'];
