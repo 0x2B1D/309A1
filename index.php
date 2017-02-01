@@ -103,6 +103,7 @@
 
 
             if(isset($_POST['Logout'])){
+              echo "helllo";
               logout();
             }
 
