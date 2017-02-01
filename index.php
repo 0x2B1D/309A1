@@ -26,21 +26,9 @@
             if(isset($_POST['login'])){ 
                                     
                 while ($row = pg_fetch_row($users_query)){
-                     // helper function????
-                     $_SESSION['username'] = $_REQUEST['user'];
-                     $result=pg_query_params($dbconn, "SELECT * FROM appuser WHERE username=$1;", array($_SESSION['username']));
-                     $_SESSION['firstname']=pg_fetch_result($result,0,2);
-                     $_SESSION['lastname']=pg_fetch_result($result,0,3);
-                     $_SESSION['email']=pg_fetch_result($result,0,4);
-
+                    $result=$_SESSION['model']->sessSet($_REQUEST['user']);
                     // if registered go to profile
                     if ($_REQUEST['user']=="$row[0]" && $_REQUEST['password']=="$row[1]" && $row[5]==NULL){
-                        // helper function????
-                        $_SESSION['username'] = $_REQUEST['user'];
-                        $result=pg_query_params($dbconn, "SELECT * FROM appuser WHERE username=$1;", array($_SESSION['username']));
-                        $_SESSION['firstname']=pg_fetch_result($result,0,2);
-                        $_SESSION['lastname']=pg_fetch_result($result,0,3);
-                        $_SESSION['email']=pg_fetch_result($result,0,4);
                         $_SESSION['state']='profile';
                         $view="profile.php";
                         break;
