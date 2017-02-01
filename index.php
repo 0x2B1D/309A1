@@ -183,10 +183,9 @@
         
         case 'student_getit':
            $view = "student_currentclass.php";
-           if($value =$_GET['value']){
-               $_SESSION['model']->logVote($_SESSION['username'], $_SESSION['courseCode'], $value);
-           }
-           break;
+           $value =$_GET['value'];
+           $_SESSION['model']->logVote($_SESSION['username'], $_SESSION['courseCode'], $value);
+          
 
     }
     require_once "view/view_lib.php";
