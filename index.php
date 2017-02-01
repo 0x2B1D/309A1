@@ -121,19 +121,6 @@
 
             $view="instructor_createclass.php";
             
-             $classEscape = $_GET['logout'];
-             if($classEscape){
-                   //navigateClass('stu');
-                    
-                  logout();
-                   
-                  break;               
-            }
-           $classEscape = $_GET['profile'];
-           if($classEscape){
-               profile();
-               break;
-           }
            
             if (isset($_POST['submit1'])){
 
@@ -168,6 +155,19 @@
                 
                        
             }
+            $classEscape = $_GET['logout'];
+             if($classEscape){
+                   //navigateClass('stu');
+                    
+                  logout();
+                   
+                  break;               
+            }
+           $classEscape = $_GET['profile'];
+           if($classEscape){
+               profile();
+               break;
+           }
             break;
 
         case 'ins_current':
@@ -258,6 +258,8 @@
     function logout(){
       global $view;
       global $_SESSION;
+      setcookie(session_name(), '', 100);
+      session_unset();
       session_destroy();
       session_save_path("sess");
       session_start();
