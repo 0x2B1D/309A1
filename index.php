@@ -103,11 +103,7 @@
 
 
             if(isset($_POST['Logout'])){
-                session_destroy();
-                session_save_path("sess");
-                session_start();
-                $_SESSION['state']='login';
-                $view = 'login.php';
+              logout();
             }
 
             break;
@@ -198,11 +194,12 @@
     }
     
     function logout(){
+      global $view;
       session_destroy();
       session_save_path("sess");
       session_start();
       $_SESSION['state']='login';
-      return 'login.php';
+      $view = 'login.php';
          
            
     }
