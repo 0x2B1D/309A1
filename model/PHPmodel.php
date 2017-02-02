@@ -16,12 +16,13 @@ class PHPmodel{
     
     
     public function _construct(){
-        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
+        
+        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname="." user="." password=");
         $this->USERNAME_NO_EXIST = 1;
         $this->WRONG_PASSWORD = 2;
         $this->VALID = 0;
     }
-    
+/*    
     public function checkUsernameEmail($username,$email){
         /*
          * CHECKS TO SEE IF THE USERNAME OR EMAIL IS ALREADY TAKEN
@@ -30,7 +31,7 @@ class PHPmodel{
          *         2 if email already exists
          * 
          */
-        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']); 
+    /*    $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']); 
         pg_prepare($this->dbconn, "first", 'SELECT * FROM appuser WHERE username = $1 ;');
         $result = pg_execute($this->dbconn,"first",array($username));
         if(!(pg_num_rows($result) == 0)){
@@ -51,7 +52,7 @@ class PHPmodel{
          *         2 if incorrect password
          *         0 on successs
          */
-        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);        
+      /*  $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);        
         $result = pg_prepare($this->dbconn, "third", 'SELECT * FROM appuser WHERE username = $1 ;');
         $result = pg_execute($this->dbconn,"third",array($username));
         if((pg_num_rows($result) == 0)){
@@ -74,7 +75,7 @@ class PHPmodel{
          *         2 if email already exists
          *         3 if empty
         */
-        $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']); 
+        /*$this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']); 
         $fields = array('firstName', 'lastName', 'user', 'password', 'email');
 
         $error = false; //No errors yet
@@ -118,7 +119,7 @@ class PHPmodel{
 
 
 	*/
-    $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
+/*    $this->dbconn = pg_connect("host=mcsdb.utm.utoronto.ca dbname=".$_SESSION['dbname']." user=".$_SESSION['utorid']." password=".$_SESSION['pass']);
 	pg_prepare($this->dbconn,'course','select * from courses where course = $1 and code = $2;');
 	$result = pg_execute($this->dbconn,'course',array($course,$code));
 	if (pg_num_rows($result) == 0){
@@ -217,7 +218,7 @@ class PHPmodel{
         $_SESSION['lastname']=pg_fetch_result($result,0,3);
         $_SESSION['email']=pg_fetch_result($result,0,4);
         $_SESSION['role']=pg_fetch_result($result,0,5);
-    }
+    }*/
 }
 
 ?>
